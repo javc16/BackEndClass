@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace BackEndClass.Domain
 {
-    public class UserDomainService
+    public class UsuarioDomainService
     {
-        public string ValidateFirstName(string firstName)
+        public string ValidateFirstName(string nombre)
         {
-            if (string.IsNullOrEmpty(firstName))
+            if (string.IsNullOrEmpty(nombre))
             {
                 return "El campo no puede estar vacio";
             }
@@ -17,9 +17,9 @@ namespace BackEndClass.Domain
             return "El campo fue validado con exito";
         }
 
-        public string ValidateLastName(string lastName)
+        public string ValidateLastName(string apellido)
         {
-            if (string.IsNullOrEmpty(lastName))
+            if (string.IsNullOrEmpty(apellido))
             {
                 return "El campo no puede estar vacio";
             }

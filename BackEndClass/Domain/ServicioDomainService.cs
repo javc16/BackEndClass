@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BackEndClass.Domain
 {
-    public class ServicesDomainService
+    public class ServicioDomainService
     {
         public string ValidateDescription(string descripcion)
         {
@@ -35,17 +35,7 @@ namespace BackEndClass.Domain
             }
 
             return "El campo fue validado con exito";
-        }
-
-        public string ValidateStatus(string status)
-        {
-            if (string.IsNullOrEmpty(status))
-            {
-                return "El campo no puede estar vacio";
-            }
-
-            return "El campo fue validado con exito";
-        }
+        }     
 
         public string ValidateName(string nombre)
         {
