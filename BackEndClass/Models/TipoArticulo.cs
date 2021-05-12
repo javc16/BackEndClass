@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BackEndClass.Models
 {
-    public class TipoArticulos
+    public class TipoArticulo
     {
         public int id { get; set; }
         public string description { get; set; }

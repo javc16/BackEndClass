@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BackEndClass.Models
 {
-    public class Recomendation
+    public class Recomendacion
     {
         public int Id { get; set; }
         public int Stars { get; set; }

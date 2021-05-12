@@ -15,15 +15,15 @@ namespace BackEndClass.Context
         }
 
         public DbSet<Articulo> Articulo { get; set; }
-        public DbSet<Servicios> Servicio { get; set; }
-        public DbSet<TipoArticulos> TipoArticulo { get; set; }
-        public DbSet<TipoServicios> TipoServicio { get; set; }
+        public DbSet<Servicio> Servicio { get; set; }
+        public DbSet<TipoArticulo> TipoArticulo { get; set; }
+        public DbSet<TipoServicio> TipoServicio { get; set; }
 
-        public DbSet<User> User { get; set; }
+        public DbSet<Usuario> User { get; set; }
         public DbSet<TipoUsuario> TipoUsuario { get; set; }
-        public DbSet<Provider> Provider { get; set; }
+        public DbSet<Proveedor> Provider { get; set; }
         //public DbSet<MasterProvider> MasterProvider { get; set; }
-        public DbSet<Recomendation> Recomendation { get; set; }
+        public DbSet<Recomendacion> Recomendation { get; set; }
 
 
 
