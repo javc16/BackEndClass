@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace BackEndClass.Models
 {
-    public class UserType
+    public class TipoUsuario
     {
         public int Id { get; set; }
-        public int Description { get; set; }
+        public string Descripcion { get; set; }
+        public int Estado { get; set; }
     }
 }

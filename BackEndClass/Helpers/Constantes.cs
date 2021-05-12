@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace BackEndClass.Helpers
 {
-    public class Constants
+    public static class Constantes
     {
+        public const int Activo = 1;
+        public const int Inactivo = 0;
     }
 }

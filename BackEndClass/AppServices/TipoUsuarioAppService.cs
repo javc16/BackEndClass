@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace BackEndClass.AppServices
 {
-    public class UserTypeAppService
+    public class TipoUsuarioAppService: ITipoUsuarioAppService
     {
         private readonly MWSContext _context;
         private readonly TipoUsuarioDomainService _userTypeDomainService;
 
-        public UserTypeAppService(MWSContext context, TipoUsuarioDomainService userTypeDomainService)
+        public TipoUsuarioAppService(MWSContext context, TipoUsuarioDomainService userTypeDomainService)
         {
             _context = context;
             _userTypeDomainService = userTypeDomainService;
         }
 
-        public async Task<IEnumerable<TipoUsuario>> GetAll()
+        public IEnumerable<TipoUsuario> GetAll()
         {
-            return await _context.TipoUsuario.ToListAsync();
+            return _context.TipoUsuario.Where(x => x.Estado==Constantes.Activo);
         }
 
         public async Task<Response> GetById(long id)
@@ -31,49 +31,51 @@ namespace BackEndClass.AppServices
             var tipoUsuario = await _context.TipoUsuario.FirstOrDefaultAsync(r => r.Id == id);
             if (tipoUsuario == null)
             {
-                return new Response { Message = "Este tipo de usuario no existe" };
+                return new Response { Mensaje = "Este tipo de usuario no existe" };
             }
 
-            return new Response { Data = tipoUsuario };
+            return new Response { Datos = tipoUsuario };
         }
 
-        public async Task<Response> PostUserType(TipoUsuario tipoUsuario)
+        public async Task<Response> PostTipoUsuario(TipoUsuario tipoUsuario)
         {
             string mensaje = _userTypeDomainService.ValidarDescripcion(tipoUsuario.Descripcion);
             if (!String.IsNullOrEmpty(mensaje)) 
             {
-                return new Response { Message = mensaje };
+                return new Response { Mensaje = mensaje };
             }                
             
             var SavedUser = await _context.TipoUsuario.FirstOrDefaultAsync(r => r.Descripcion == tipoUsuario.Descripcion);
             if (SavedUser != null)
             {
-                return new Response { Message = "Este tipo de usuario ya existe en el sistema" };
+                return new Response { Mensaje = "Este tipo de usuario ya existe en el sistema" };
             }
 
             _context.TipoUsuario.Add(tipoUsuario);
             await _context.SaveChangesAsync();
-            return new Response { Message = "Tipo de Usuario agregado correctamente" };
+            return new Response { Mensaje = "Tipo de Usuario agregado correctamente" };
         }
 
-        public async Task<Response> PutUserType(TipoUsuario tipoUsuario)
+        public async Task<Response> PutTipoUsuario(TipoUsuario tipoUsuario)
         {
             _context.Entry(tipoUsuario).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return new Response { Message = $"Tipo de Usuario {tipoUsuario.Descripcion} modificado correctamente" };
+            return new Response { Mensaje = $"Tipo de Usuario {tipoUsuario.Descripcion} modificado correctamente" };
         }
 
-        public async Task<Response> DeleteUserType(int id)
+        public async Task<Response> DeleteTipoUsuario(int id)
         {
             var tipoUsuario = await _context.TipoUsuario.FindAsync(id);
             if (tipoUsuario == null)
             {
-                return new Response { Message = $"No have a provider with this id" }; ;
+                return new Response { Mensaje = $"No tenemos un tipo de usuario con ese id" }; ;
             }
-            
+            tipoUsuario.Estado = 0;
             _context.Entry(tipoUsuario).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return new Response { Message = $"Tipo de Usuario {tipoUsuario.Descripcion} elinado correctamente" };
+            return new Response { Mensaje = $"Tipo de Usuario {tipoUsuario.Descripcion} eliminado correctamente" };
         }
+
+       
     }
 }

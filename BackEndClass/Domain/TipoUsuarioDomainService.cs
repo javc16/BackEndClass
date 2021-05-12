@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace BackEndClass.Domain
 {
-    public class UserTypeDomainService
+    public class TipoUsuarioDomainService
     {
-        public string ValidateDescription(string descripcion) 
+        public string ValidarDescripcion(string descripcion) 
         {
             if (string.IsNullOrEmpty(descripcion)) 
             {
@@ -16,5 +16,6 @@ namespace BackEndClass.Domain
 
             return "El campo fue validado con exito";
         }
+      
     }
 }
