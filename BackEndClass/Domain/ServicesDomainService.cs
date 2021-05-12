@@ -27,9 +27,9 @@ namespace BackEndClass.Domain
             return "El campo fue validado con exito";
         }
 
-        public int ValidatePrice(int precio)
+        public string ValidatePrice(decimal precio)
         {
-            if (int.IsNullOrEmpty(precio))
+            if (precio==0)
             {
                 return "El campo no puede estar vacio";
             }
