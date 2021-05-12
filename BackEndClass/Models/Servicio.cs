@@ -8,11 +8,10 @@ namespace BackEndClass.Models
     public class Servicio
     {
         public int id { get; set; }
-        public string description { get; set; }
-        public string alias { get; set; }
-        public int TipoServiciosID { get; set; }
-        public int price { get; set; }
-        public string status { get; set; }
-        public string name { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public string Alias { get; set; }
+        public decimal Precio { get; set; }
+        public int Estado { get; set; }
     }
 }

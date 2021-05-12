@@ -19,11 +19,11 @@ namespace BackEndClass.Context
         public DbSet<TipoArticulo> TipoArticulo { get; set; }
         public DbSet<TipoServicio> TipoServicio { get; set; }
 
-        public DbSet<Usuario> User { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
         public DbSet<TipoUsuario> TipoUsuario { get; set; }
-        public DbSet<Proveedor> Provider { get; set; }
+        public DbSet<Proveedor> Proveedor { get; set; }
         //public DbSet<MasterProvider> MasterProvider { get; set; }
-        public DbSet<Recomendacion> Recomendation { get; set; }
+        public DbSet<Recomendacion> Recomendacion { get; set; }
 
 
 

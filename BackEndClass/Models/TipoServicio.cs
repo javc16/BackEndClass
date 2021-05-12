@@ -8,8 +8,8 @@ namespace BackEndClass.Models
     public class TipoServicio
     {
         public int id { get; set; }
-        public string description { get; set; }
-        public string type { get; set; }
-        public bool status { get; set; }
+        public string Descripcion { get; set; }
+        public string Tipo { get; set; }
+        public int Estado { get; set; }
     }
 }
