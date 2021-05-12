@@ -27,9 +27,9 @@ namespace BackEndClass.Domain
             return "El campo fue validado con exito";
         }
 
-        public string ValidatePhone(string Phone)
+        public string ValidatePhone(string phone)
         {
-            if (string.IsNullOrEmpty(Phone))
+            if (string.IsNullOrEmpty(phone))
             {
                 return "El campo no puede estar vacio";
             }
@@ -37,9 +37,9 @@ namespace BackEndClass.Domain
             return "El campo fue validado con exito";
         }
 
-        public string ValidateBussines(string Bussines)
+        public string ValidateBussines(string bussines)
         {
-            if (string.IsNullOrEmpty(Bussines))
+            if (string.IsNullOrEmpty(bussines))
             {
                 return "El campo no puede estar vacio";
             }
