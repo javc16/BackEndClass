@@ -7,9 +7,9 @@ namespace BackEndClass.Domain
 {
     public class ArticuloDomainService
     {
-        public string ValidateFirstName(string Descripción)
+        public string ValidateFirstName(string Descripcion)
         {
-            if (String.IsNullOrEmpty(Descripción))
+            if (String.IsNullOrEmpty(Descripcion))
             {
                 return "El campo no puede estar vacio";
             }
@@ -27,9 +27,9 @@ namespace BackEndClass.Domain
             return "El campo fue validado con exito";
         }
 
-        public string ValidatePhone(string Name)
+        public string ValidatePhone(string Nombre)
         {
-            if (string.IsNullOrEmpty(Name))
+            if (string.IsNullOrEmpty(Nombre))
             {
                 return "El campo no puede estar vacio";
             }
@@ -37,9 +37,9 @@ namespace BackEndClass.Domain
             return "El campo fue validado con exito";
         }
 
-        public int ValidateBussines(string Price)
+        public string ValidateBussines(decimal Precio)
         {
-            if (Int.IsNullOrEmpty(Price))
+            if (Precio==0)
             {
                 return "El campo no puede estar vacio";
             }
