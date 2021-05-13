@@ -61,6 +61,7 @@ namespace BackEndClass.AppServices
             _context.Entry(tipoArticulo).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return new Response { Mensaje = $"Tipo de Articulo {tipoArticulo.Descripcion} modificado correctamente" };
+       
         }
 
         public async Task<Response> DeleteTipoArticulo(int id)

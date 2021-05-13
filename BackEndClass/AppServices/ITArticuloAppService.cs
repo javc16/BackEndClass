@@ -14,5 +14,6 @@ namespace BackEndClass.AppServices
         Task<Response> PostArticulo(Articulo Articulo);
         Task<Response> PutArticulo(Articulo Articulo);
         Task<Response> DeleteArticuloUsuario(int id);
+        
     }
 }
