@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BackEndClass.AppServices
 {
-    interface IProveedorAppService
+    public interface IProveedorAppService
     {
         IEnumerable<Proveedor> GetAll();
         Task<Response> GetById(long id);
