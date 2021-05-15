@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BackEndClass.AppServices
 {
-    interface ITipoArticuloAppService
+    public interface ITipoArticuloAppService
     {
         IEnumerable<TipoArticulo> GetAll();
         Task<Response> GetById(long id);
