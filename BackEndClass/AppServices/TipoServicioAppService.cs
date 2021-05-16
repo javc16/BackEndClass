@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BackEndClass.AppServices
 {
-    public class TipoServicioAppService
+    public class TipoServicioAppService: ITipoServicioAppService
     {
         private readonly MWSContext _context;
         private readonly TipoServicioDomainService _tipoServicioDomainService;
