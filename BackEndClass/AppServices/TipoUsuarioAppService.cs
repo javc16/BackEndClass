@@ -2,6 +2,7 @@
 using BackEndClass.Domain;
 using BackEndClass.Helpers;
 using BackEndClass.Models;
+using BackEndClass.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,11 @@ namespace BackEndClass.AppServices
             _userTypeDomainService = userTypeDomainService;
         }
 
-        public IEnumerable<TipoUsuario> GetAll()
+        public IEnumerable<TipoUsuarioDTO> GetAll()
         {
-            return _context.TipoUsuario.Where(x => x.Estado==Constantes.Activo);
+            var tiposDeUsuario =_context.TipoUsuario.Where(x => x.Estado==Constantes.Activo);
+            var tiposDeusuarioDTO = TipoUsuarioDTO.DeModeloADTO(tiposDeUsuario);
+            return tiposDeusuarioDTO;
         }
 
         public async Task<Response> GetById(long id)
@@ -33,8 +36,8 @@ namespace BackEndClass.AppServices
             {
                 return new Response { Mensaje = "Este tipo de usuario no existe" };
             }
-
-            return new Response { Datos = tipoUsuario };
+            var data = TipoUsuarioDTO.DeModeloADTO(tipoUsuario);
+            return new Response { Datos = data };
         }
 
         public async Task<Response> PostTipoUsuario(TipoUsuario tipoUsuario)
@@ -70,7 +73,7 @@ namespace BackEndClass.AppServices
             {
                 return new Response { Mensaje = $"No tenemos un tipo de usuario con ese id" }; ;
             }
-            tipoUsuario.Estado = 0;
+            tipoUsuario.Estado = Constantes.Inactivo;
             _context.Entry(tipoUsuario).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return new Response { Mensaje = $"Tipo de Usuario {tipoUsuario.Descripcion} eliminado correctamente" };

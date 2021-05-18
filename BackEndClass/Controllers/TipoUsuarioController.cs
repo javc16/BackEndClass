@@ -1,5 +1,6 @@
 ﻿using BackEndClass.AppServices;
 using BackEndClass.Models;
+using BackEndClass.Models.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,7 +23,7 @@ namespace BackEndClass.Controllers
 
 
         [HttpGet]
-        public  ActionResult<IEnumerable<TipoUsuario>> GetAll()
+        public  ActionResult<IEnumerable<TipoUsuarioDTO>> GetAll()
         {
             var result = _tipoUsuarioAppService.GetAll();
             return Ok(result);

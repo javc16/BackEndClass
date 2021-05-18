@@ -15,9 +15,9 @@ namespace BackEndClass.Controllers
     {
         private readonly IArticuloAppService _articuloAppService;
 
-        public ArticuloController(ITipoUsuarioAppService tipoUsuarioAppService)
+        public ArticuloController(IArticuloAppService tipoUsuarioAppService)
         {
-            _articuloAppService = ArticuloAppServices;
+            _articuloAppService = tipoUsuarioAppService;
         }
 
 
