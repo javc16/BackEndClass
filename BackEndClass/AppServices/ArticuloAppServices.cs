@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace BackEndClass.AppServices
 {
-    public class ArticuloAppService
+    public class ArticuloAppServices: IArticuloAppService
     {
         private readonly MWSContext _context;
         private readonly ArticuloDomainService _ArticuloDomainService;
 
-        public ArticuloAppService(MWSContext context, ArticuloDomainService ArticuloDomainService)
+        public ArticuloAppServices(MWSContext context, ArticuloDomainService ArticuloDomainService)
         {
             _context = context;
             _ArticuloDomainService = ArticuloDomainService;
@@ -28,10 +28,10 @@ namespace BackEndClass.AppServices
 
         public async Task<Response> GetById(long id)
         {
-            var Articulo = await _context.Articulo.FirstOrDefaultAsync(r => r.id == id);
+            var Articulo = await _context.Articulo.FirstOrDefaultAsync(r => r.Id == id);
             if (Articulo == null)
             {
-                return new Response { Mensaje = "Este articulo no existe" };
+                return new Response { Mensaje = "Este tipo de articulo no existe" };
             }
 
             return new Response { Datos = Articulo };
@@ -48,19 +48,20 @@ namespace BackEndClass.AppServices
             var GuardarArticulo = await _context.Articulo.FirstOrDefaultAsync(r => r.Descripcion == Articulo.Descripcion);
             if (GuardarArticulo != null)
             {
-                return new Response { Mensaje = "Este articulo ya existe en el sistema" };
+                return new Response { Mensaje = "Este tipo de articulo ya existe en el sistema" };
             }
 
-            _context.TipoArticulo.Add(Articulo);
+            _context.Articulo.Add(Articulo);
             await _context.SaveChangesAsync();
-            return new Response { Mensaje = "Articulo agregado correctamente" };
+            return new Response { Mensaje = "Tipo de Articulo agregado correctamente" };
         }
 
         public async Task<Response> PutArticulo(Articulo Articulo)
         {
             _context.Entry(Articulo).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return new Response { Mensaje = $" Articulo {Articulo.Descripcion} modificado correctamente" };
+            return new Response { Mensaje = $"Articulo {Articulo.Descripcion} modificado correctamente" };
+       
         }
 
         public async Task<Response> DeleteArticulo(int id)
@@ -68,12 +69,12 @@ namespace BackEndClass.AppServices
             var Articulo = await _context.Servicio.FindAsync(id);
             if (Articulo == null)
             {
-                return new Response { Mensaje = $"No tenemos un articulo con ese id" }; ;
+                return new Response { Mensaje = $"No tenemos un tipo de articulo con ese id" }; ;
             }
             Articulo.Estado = 0;
-            _context.Entry(tipoArticulo).State = EntityState.Modified;
+            _context.Entry(Articulo).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return new Response { Mensaje = $"Tipo de Articulo {Articulo.Descripcion} eliminado correctamente" };
+            return new Response { Mensaje = $"Articulo {Articulo.Descripcion} eliminado correctamente" };
         }
     }
 }

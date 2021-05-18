@@ -4,10 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace BackEndClass.AppServices
 {
-    interface ArticuloAppServices
+    interface IArticuloAppService
     {
         IEnumerable<Articulo> GetAll();
         Task<Response> GetById(long id);
