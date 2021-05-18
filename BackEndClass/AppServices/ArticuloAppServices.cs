@@ -66,7 +66,7 @@ namespace BackEndClass.AppServices
 
         public async Task<Response> DeleteArticulo(int id)
         {
-            var Articulo = await _context.Servicio.FindAsync(id);
+            var Articulo = await _context.Articulo.FindAsync(id);
             if (Articulo == null)
             {
                 return new Response { Mensaje = $"No tenemos un tipo de articulo con ese id" }; ;
