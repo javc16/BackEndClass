@@ -15,9 +15,9 @@ namespace BackEndClass.Controllers
     {
         private readonly IArticuloAppService _articuloAppService;
 
-        public ArticuloController(ITipoUsuarioAppService tipoUsuarioAppService)
+        public ArticuloController(ArticuloAppServices articuloAppService)
         {
-            _articuloAppService = ArticuloAppServices;
+            _articuloAppService = articuloAppService;
         }
 
 
@@ -50,7 +50,7 @@ namespace BackEndClass.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Articulo>> DeleteById(int id)
         {
-            return Ok(await _articuloAppService.DeleteArticuloUsuario(id));
+            return Ok(await _articuloAppService.DeleteArticulo(id));
         }
 
     }
