@@ -15,7 +15,7 @@ namespace BackEndClass.Controllers
     {
         private readonly IProveedorAppService _proveedorAppService;
 
-        public ProviderController(IProveedorAppService proveedorAppService)
+        public ProveedorController(IProveedorAppService proveedorAppService)
         {
             _proveedorAppService = proveedorAppService;
         }

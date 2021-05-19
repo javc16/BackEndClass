@@ -67,7 +67,6 @@ namespace BackEndClass.AppServices
             return new Response { Mensaje = "Proveedor agregado correctamente" };
         }
 
-
         public async Task<Response> DeleteProveedor(int id)
         {
             var proveedor = await _context.Proveedor.FindAsync(id);

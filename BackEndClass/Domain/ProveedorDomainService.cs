@@ -7,7 +7,7 @@ namespace BackEndClass.Domain
 {
     public class ProveedorDomainService
     {
-        public string ValidateFirstName(string nombre)
+        public string ValidarNombre(string nombre)
         {
             if (string.IsNullOrEmpty(nombre))
             {
@@ -16,7 +16,7 @@ namespace BackEndClass.Domain
                 return "El campo fue validado con exito";
         }
 
-        public string ValidateLastName(string apellido)
+        public string ValidarApellido(string apellido)
         {
             if (string.IsNullOrEmpty(apellido))
             {
@@ -25,7 +25,7 @@ namespace BackEndClass.Domain
                 return "El campo fue validado con exito";
         }
 
-        public string ValidatePhone(string telefono)
+        public string ValidarTelefono(string telefono)
         {
             if (string.IsNullOrEmpty(telefono))
             {
@@ -34,7 +34,7 @@ namespace BackEndClass.Domain
                 return "El campo fue validado con exito";
         }
 
-        public string ValidateBussines(string empresa)
+        public string ValidarEmpresa(string empresa)
         {
             if (string.IsNullOrEmpty(empresa))
             {
