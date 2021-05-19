@@ -2,6 +2,7 @@
 using BackEndClass.Domain;
 using BackEndClass.Helpers;
 using BackEndClass.Models;
+using BackEndClass.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,11 @@ namespace BackEndClass.AppServices
             _servicioDomainService = servicioDomainService;
         }
 
-        public IEnumerable<Servicio> GetAll()
+        public IEnumerable<ServicioDTO> GetAll()
         {
-            return _context.Servicio.Where(x => x.Estado==Constantes.Activo);
+            var servicios = _context.Servicio.Where(x => x.Estado==Constantes.Activo);
+            var serviciosDTO = ServicioDTO.DeModeloADTO(servicios);
+            return serviciosDTO;
         }
 
         public async Task<Response> GetById(long id)
@@ -34,7 +37,8 @@ namespace BackEndClass.AppServices
                 return new Response { Mensaje = "Este servicio no existe" };
             }
 
-            return new Response { Datos = servicio };
+            var data = ServicioDTO.DeModeloADTO(servicio);
+            return new Response { Datos = data };
         }
 
         public async Task<Response> PostServicio(Servicio servicio)

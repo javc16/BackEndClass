@@ -13,5 +13,32 @@ namespace BackEndClass.Models
         public string Alias { get; set; }
         public decimal Precio { get; set; }
         public int Estado { get; set; }
+
+        public sealed class Builder
+        {
+            private readonly Servicio _servicio;
+
+            public Builder(string descripcion, string alias, decimal precio, string nombre)
+            {
+                _servicio = new Servicio
+                {
+                    Descripcion = descripcion,
+                    Alias = alias,
+                    Precio = precio,
+                    Nombre = nombre
+                };
+            }
+
+            public Builder conEstado(int estado)
+            {
+                _servicio.Estado = estado;
+                return this;
+            }
+
+            public Servicio Construir()
+            {
+                return _servicio;
+            }
+        }
     }
 }
