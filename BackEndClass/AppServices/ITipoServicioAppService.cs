@@ -12,8 +12,8 @@ namespace BackEndClass.AppServices
     {
         IEnumerable<TipoServicioDTO> GetAll();
         Task<Response> GetById(long id);
-        Task<Response> PostTipoServicio(TipoServicio tipoUsuario);
-        Task<Response> PutTipoServicio(TipoServicio tipoUsuario);
+        Task<Response> PostTipoServicio(TipoServicio tipoServicio);
+        Task<Response> PutTipoServicio(TipoServicio tipoServicio);
         Task<Response> DeleteTipoServicio(int id);
     }
 }
