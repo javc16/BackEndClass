@@ -9,7 +9,7 @@ namespace BackEndClass.AppServices
 {
     public interface IProveedorAppService
     {
-        IEnumerable<Proveedor> GetAll();
+        IEnumerable<ProveedorDTO> GetAll();
         Task<Response> GetById(long id);
         Task<Response> PostProveedor(Proveedor proveedor);
         Task<Response> PutProveedor(Proveedor proveedor);
