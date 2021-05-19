@@ -16,7 +16,7 @@ namespace BackEndClass.AppServices
         private readonly MWSContext _context;
         private readonly ProveedorDomainService _proveedorDomainService;
 
-        public ProveedorAppService(MWSContext context, ProveedorDomainService ProveedorDomainService)
+        public ProveedorAppService(MWSContext context, ProveedorDomainService proveedorDomainService)
         {
             _context = context;
             _proveedorDomainService = proveedorDomainService;
@@ -24,9 +24,9 @@ namespace BackEndClass.AppServices
 
         public IEnumerable<ProveedorDTO> GetAll()
         {
-            var proveedor = _context.Proveedor.Where(x => x.Estado==Constantes.Activo);
-            var proveedorDTO = ProveedorDTO.DeModeloADTO(proveedor);
-            return proveedorDTO;
+            var proveedores = _context.Proveedor.Where(x => x.Estado==Constantes.Activo);
+            var proveedoresDTO = ProveedorDTO.DeModeloADTO(proveedores);
+            return proveedoresDTO;
         }
 
         public async Task<Response> GetById(long id)
@@ -48,13 +48,6 @@ namespace BackEndClass.AppServices
             {
                 return new Response { Mensaje = mensaje };
             }
-
-            mensaje = _proveedorDomainService.ValidateLastName(proveedor.Apellido);
-            if (!String.IsNullOrEmpty(mensaje))
-            {
-                return new Response { Mensaje = mensaje };
-            }
-
 
             var GuardarProveedor= await _context.Proveedor.FirstOrDefaultAsync(r => r.Nombre == proveedor.Nombre);
             if (GuardarProveedor != null)
