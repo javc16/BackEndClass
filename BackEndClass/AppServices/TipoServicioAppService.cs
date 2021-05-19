@@ -1,4 +1,5 @@
 ﻿using BackEndClass.Context;
+using BackEndClass.Models.DTOs;
 using BackEndClass.Domain;
 using BackEndClass.Helpers;
 using BackEndClass.Models;
@@ -21,9 +22,11 @@ namespace BackEndClass.AppServices
             _tipoServicioDomainService = tipoServicioDomainService;
         }
 
-        public IEnumerable<TipoServicio> GetAll()
+        public IEnumerable<TipoServicioDTO> GetAll()
         {
-            return _context.TipoServicio.Where(x => x.Estado == Constantes.Activo);
+            var tiposDeServicio = _context.TipoServicio.Where(x => x.Estado == Constantes.Activo);
+            var tiposDeServicioDTO = TipoServicioDTO.DeModeloADTO(tiposDeServicio);
+            return tiposDeServicioDTO;
         }
 
         public async Task<Response> GetById(long id)
@@ -33,8 +36,8 @@ namespace BackEndClass.AppServices
             {
                 return new Response { Mensaje = "Este tipo de servicio no existe" };
             }
-
-            return new Response { Datos = tipoServicio };
+            var data = TipoServicioDTO.DeModeloADTO(tipoServicio);
+            return new Response { Datos = data };
         }
 
         public async Task<Response> PostTipoServicio(TipoServicio tipoServicio)

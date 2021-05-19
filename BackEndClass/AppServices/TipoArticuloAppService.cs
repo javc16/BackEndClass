@@ -1,4 +1,5 @@
 ﻿using BackEndClass.Context;
+using BackEndClass.Models.DTOs;
 using BackEndClass.Domain;
 using BackEndClass.Helpers;
 using BackEndClass.Models;
@@ -21,9 +22,11 @@ namespace BackEndClass.AppServices
             _tipoArticuloDomainService = tipoArticuloDomainService;
         }
 
-        public IEnumerable<TipoArticulo> GetAll()
+        public IEnumerable<TipoArticuloDTO> GetAll()
         {
-            return _context.TipoArticulo.Where(x => x.Estado == Constantes.Activo);
+            var tiposDeArticulo = _context.TipoArticulo.Where(x => x.Estado == Constantes.Activo);
+            var tiposDeArticuloDTO = TipoArticuloDTO.DeModeloADTO(tiposDeArticulo);
+            return tiposDeArticuloDTO;
         }
 
         public async Task<Response> GetById(long id)
@@ -33,8 +36,8 @@ namespace BackEndClass.AppServices
             {
                 return new Response { Mensaje = "Este tipo de articulo no existe" };
             }
-
-            return new Response { Datos = tipoArticulo };
+            var data = TipoArticuloDTO.DeModeloADTO(tipoArticulo);
+            return new Response { Datos = data };
         }
 
         public async Task<Response> PostTipoArticulo(TipoArticulo tipoArticulo)

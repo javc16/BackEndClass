@@ -1,5 +1,6 @@
 ﻿using BackEndClass.Helpers;
 using BackEndClass.Models;
+using BackEndClass.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace BackEndClass.AppServices
 {
     public interface ITipoArticuloAppService
     {
-        IEnumerable<TipoArticulo> GetAll();
+        IEnumerable<TipoArticuloDTO> GetAll();
         Task<Response> GetById(long id);
         Task<Response> PostTipoArticulo(TipoArticulo tipoArticulo);
         Task<Response> PutTipoArticulo(TipoArticulo tipoArticulo);
