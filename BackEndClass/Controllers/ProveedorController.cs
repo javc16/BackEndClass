@@ -24,7 +24,7 @@ namespace BackEndClass.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Proveedor>>> GetAll()
         {
-            var result = await _proveedorAppService.GetAll();
+            var result = _proveedorAppService.GetAll();
             return Ok(result);
         }
 
