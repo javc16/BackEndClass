@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BackEndClass.Models.DTOs;
 
 namespace BackEndClass.AppServices
 {
@@ -21,9 +22,11 @@ namespace BackEndClass.AppServices
             _ArticuloDomainService = ArticuloDomainService;
         }
 
-        public IEnumerable<Articulo> GetAll()
+        public IEnumerable<ArticuloDTO> GetAll()
         {
-            return _context.Articulo.Where(x => x.Estado == Constantes.Activo);
+             var Articulo = _context.Articulo.Where(x => x.Estado == Constantes.Activo);
+            var articuloDTO = ArticuloDTO.DeModeloADTO(Articulo);
+            return articuloDTO;
         }
 
         public async Task<Response> GetById(long id)
