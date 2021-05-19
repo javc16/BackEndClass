@@ -20,14 +20,12 @@ namespace BackEndClass.Controllers
             _proveedorAppService = proveedorAppService;
         }
 
-
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Proveedor>>> GetAll()
+        public ActionResult<IEnumerable<Proveedor>> GetAll()
         {
             var result = _proveedorAppService.GetAll();
             return Ok(result);
         }
-
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Proveedor>> GetById(long id)
