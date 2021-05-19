@@ -8,11 +8,12 @@ namespace BackEndClass.AppServices
 {
     public interface IArticuloAppService
     {
-        IEnumerable<Articulo> GetAll();
+        IEnumerable<ArticuloDTO> GetAll();
         Task<Response> GetById(long id);
         Task<Response> PostArticulo(Articulo Articulo);
         Task<Response> PutArticulo(Articulo Articulo);
         Task<Response> DeleteArticulo(int id);
+
         
     }
 }
