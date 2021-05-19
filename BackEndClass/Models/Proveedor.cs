@@ -15,5 +15,33 @@ namespace BackEndClass.Models
         public string Empresa { get; set; }
         public string Direccion { get; set; }
         public int Estado { get; set; }
+    public sealed class Builder
+        {
+            private readonly Proveedor _proveedor;
+
+            public Builder(string nombre, string apellido, string email, string telefono,
+                            string empresa, string direccion)
+            {
+                _proveedor = new Proveedor
+                {
+                    Nombre = nombre,
+                    Apellido = apellido,
+                    Email = email,
+                    Telefono = telefono,
+                    Empresa = empresa,
+                    Direccion = direccion
+                };
+            }
+            public Builder conEstado(int estado)
+            {
+                _proveedor.Estado = estado;
+                return this;
+            }
+
+            public Proveedor Construir()
+            {
+                return _proveedor;
+            }
+        }
     }
 }

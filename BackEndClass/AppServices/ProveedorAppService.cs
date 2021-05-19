@@ -21,9 +21,11 @@ namespace BackEndClass.AppServices
             _proveedorDomainService = proveedorDomainService;
         }
 
-        public IEnumerable<Proveedor> GetAll()
+        public IEnumerable<ProveedorDTO> GetAll()
         {
-            return _context.Proveedor.Where(x => x.Estado == Constantes.Activo);
+            var proveedor = _context.Proveedor.Where(x => x.Estado==Constantes.Activo);
+            var proveedorDTO = ProveedorDTO.DeModeloADTO(proveedor);
+            return proveedorDTO;
         }
 
         public async Task<Response> GetById(long id)

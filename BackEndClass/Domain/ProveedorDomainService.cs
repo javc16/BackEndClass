@@ -13,8 +13,7 @@ namespace BackEndClass.Domain
             {
                 return "El campo no puede estar vacio";
             }
-
-            return "El campo fue validado con exito";
+                return "El campo fue validado con exito";
         }
 
         public string ValidateLastName(string apellido)
@@ -23,8 +22,7 @@ namespace BackEndClass.Domain
             {
                 return "El campo no puede estar vacio";
             }
-
-            return "El campo fue validado con exito";
+                return "El campo fue validado con exito";
         }
 
         public string ValidatePhone(string telefono)
@@ -33,8 +31,7 @@ namespace BackEndClass.Domain
             {
                 return "El campo no puede estar vacio";
             }
-
-            return "El campo fue validado con exito";
+                return "El campo fue validado con exito";
         }
 
         public string ValidateBussines(string empresa)
@@ -43,8 +40,7 @@ namespace BackEndClass.Domain
             {
                 return "El campo no puede estar vacio";
             }
-
-            return "El campo fue validado con exito";
+                return "El campo fue validado con exito";
         }
     }
 }
