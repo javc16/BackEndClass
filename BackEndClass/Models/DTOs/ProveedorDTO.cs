@@ -50,7 +50,12 @@ namespace BackEndClass.Models.DTOs
 
         public static Proveedor DeDTOAModelo(ProveedorDTO proveedorDTO)
         {
-            return proveedorDTO != null ? new Proveedor.Builder(proveedorDTO.Estado).conEstado(proveedorDTO.Estado).Construir() : null;
+            return proveedorDTO != null ? new Proveedor.Builder(proveedorDTO.Nombre, 
+            proveedorDTO.Apellido, 
+            proveedorDTO.Email, 
+            proveedorDTO.Telefono, 
+            proveedorDTO.Empresa, 
+            proveedorDTO.Direccion).conEstado(proveedorDTO.Estado).Construir() : null;
         }
     }
 }
