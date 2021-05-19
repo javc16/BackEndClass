@@ -38,7 +38,7 @@ namespace BackEndClass.Models.DTOs
                 return new List<ProveedorDTO>();
             }
 
-            List<ProveedorDTO> proveedorData = new List<proveedorDTO>();
+            List<ProveedorDTO> proveedorData = new List<ProveedorDTO>();
 
             foreach (var item in proveedor)
             {
@@ -50,7 +50,7 @@ namespace BackEndClass.Models.DTOs
 
         public static Proveedor DeDTOAModelo(ProveedorDTO proveedorDTO)
         {
-            return proveedorDTO != null ? new Proveedor.Builder(proveedorDTO.Nombre).conEstado(proveedorDTO.Estado).Construir() : null;
+            return proveedorDTO != null ? new Proveedor.Builder(proveedorDTO.Estado).conEstado(proveedorDTO.Estado).Construir() : null;
         }
     }
 }
