@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BackEndClass.Models.DTOs;
 
 namespace BackEndClass.AppServices
 {
@@ -36,7 +37,8 @@ namespace BackEndClass.AppServices
                 return new Response { Mensaje = "Este Proveedor no existe" };
             }
 
-            return new Response { Datos = proveedor };
+            var data = ProveedorDTO.DeModeloADTO(proveedor);
+            return new Response { Datos = data };
         }
 
         public async Task<Response> PostProveedor(Proveedor proveedor)
@@ -54,8 +56,8 @@ namespace BackEndClass.AppServices
             }
 
 
-            var SavedUser = await _context.Proveedor.FirstOrDefaultAsync(r => r.Nombre == proveedor.Nombre);
-            if (SavedUser != null)
+            var GuardarProveedor= await _context.Proveedor.FirstOrDefaultAsync(r => r.Nombre == proveedor.Nombre);
+            if (GuardarProveedor != null)
             {
                 return new Response { Mensaje = "Este proveedor ya existe en el sistema" };
             }
