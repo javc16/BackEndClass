@@ -7,7 +7,7 @@ namespace BackEndClass.Domain
 {
     public class UsuarioDomainService
     {
-        public string ValidateFirstName(string nombre)
+        public string ValidarNombre(string nombre)
         {
             if (string.IsNullOrEmpty(nombre))
             {
@@ -17,7 +17,7 @@ namespace BackEndClass.Domain
             return "El campo fue validado con exito";
         }
 
-        public string ValidateLastName(string apellido)
+        public string ValidarApellido(string apellido)
         {
             if (string.IsNullOrEmpty(apellido))
             {

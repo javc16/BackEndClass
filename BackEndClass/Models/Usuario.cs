@@ -13,5 +13,30 @@ namespace BackEndClass.Models
         public string Email { get; set; }
         public string Telefono { get; set; }
         public int Estado { get; set; }
+
+        public sealed class Builder
+        {
+            private readonly Usuario _usuario;
+
+            public Builder(string nombre, string apellido)
+            {
+                _usuario = new Usuario
+                {
+                    Nombre = nombre,
+                    Apellido = apellido
+                };
+            }
+
+            public Builder conEstado(int estado)
+            {
+                _usuario.Estado = estado;
+                return this;
+            }
+
+            public Usuario Construir()
+            {
+                return _usuario;
+            }
+        }
     }
 }

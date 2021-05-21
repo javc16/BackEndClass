@@ -2,6 +2,7 @@
 using BackEndClass.Domain;
 using BackEndClass.Helpers;
 using BackEndClass.Models;
+using BackEndClass.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,11 @@ namespace BackEndClass.AppServices
             _usuarioDomainService = usuarioDomainService;
         }
 
-        public IEnumerable<Usuario> GetAll()
+        public IEnumerable<UsuarioDTO> GetAll()
         {
-            return _context.Usuario.Where(x => x.Estado == Constantes.Activo);
+            var usuario = _context.Usuario.Where(x => x.Estado == Constantes.Activo);
+            var usuarioDTO = UsuarioDTO.DeModeloADTO(usuario);
+            return usuarioDTO;
         }
 
         public async Task<Response> GetById(long id)
@@ -33,19 +36,19 @@ namespace BackEndClass.AppServices
             {
                 return new Response { Mensaje = "Este usuario no existe" };
             }
-
-            return new Response { Datos = usuario };
+            var data = UsuarioDTO.DeModeloADTO(usuario);
+            return new Response { Datos = data };
         }
 
         public async Task<Response> PostUsuario(Usuario usuario)
         {
-            string mensaje = _usuarioDomainService.ValidateFirstName(usuario.Nombre);
+            string mensaje = _usuarioDomainService.ValidarNombre(usuario.Nombre);
             if (!String.IsNullOrEmpty(mensaje))
             {
                 return new Response { Mensaje = mensaje };
             }
 
-            mensaje = _usuarioDomainService.ValidateLastName(usuario.Apellido);
+            mensaje = _usuarioDomainService.ValidarApellido(usuario.Apellido);
             if (!String.IsNullOrEmpty(mensaje))
             {
                 return new Response { Mensaje = mensaje };
