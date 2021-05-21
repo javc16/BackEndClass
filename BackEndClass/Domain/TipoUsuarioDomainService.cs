@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BackEndClass.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,10 +12,10 @@ namespace BackEndClass.Domain
         {
             if (string.IsNullOrEmpty(descripcion)) 
             {
-                return "El campo no puede estar vacio";
+                return Constantes.CampoObligatorio;
             }
 
-            return "El campo fue validado con exito";
+            return Constantes.ValidacionConExito;
         }
       
     }

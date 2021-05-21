@@ -43,7 +43,7 @@ namespace BackEndClass.AppServices
         public async Task<Response> PostTipoUsuario(TipoUsuario tipoUsuario)
         {
             string mensaje = _userTypeDomainService.ValidarDescripcion(tipoUsuario.Descripcion);
-            if (!String.IsNullOrEmpty(mensaje)) 
+            if (!string.IsNullOrEmpty(mensaje) && !mensaje.Equals("")) 
             {
                 return new Response { Mensaje = mensaje };
             }                

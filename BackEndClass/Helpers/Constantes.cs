@@ -9,5 +9,8 @@ namespace BackEndClass.Helpers
     {
         public const int Activo = 1;
         public const int Inactivo = 0;
+        public const string ValidacionConExito = "El campo fue validado con exito";
+        public const string CampoObligatorio = "El campo no puede estar vacio";
+
     }
 }
