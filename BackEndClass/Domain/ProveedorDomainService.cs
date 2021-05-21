@@ -1,3 +1,4 @@
+using BackEndClass.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,36 +12,36 @@ namespace BackEndClass.Domain
         {
             if (string.IsNullOrEmpty(nombre))
             {
-                return "El campo no puede estar vacio";
+                return Constantes.CampoObligatorio;
             }
-                return "El campo fue validado con exito";
+                return Constantes.ValidacionConExito;
         }
 
         public string ValidarApellido(string apellido)
         {
             if (string.IsNullOrEmpty(apellido))
             {
-                return "El campo no puede estar vacio";
+                return Constantes.CampoObligatorio;
             }
-                return "El campo fue validado con exito";
+                return Constantes.ValidacionConExito;
         }
 
         public string ValidarTelefono(string telefono)
         {
             if (string.IsNullOrEmpty(telefono))
             {
-                return "El campo no puede estar vacio";
+                return Constantes.CampoObligatorio;
             }
-                return "El campo fue validado con exito";
+                return Constantes.ValidacionConExito;
         }
 
         public string ValidarEmpresa(string empresa)
         {
             if (string.IsNullOrEmpty(empresa))
             {
-                return "El campo no puede estar vacio";
+                return Constantes.CampoObligatorio;
             }
-                return "El campo fue validado con exito";
+                return Constantes.ValidacionConExito;
         }
     }
 }
