@@ -31,7 +31,7 @@ namespace BackEndClass.AppServices
 
         public async Task<Response> GetById(long id)
         {
-            var servicio = await _context.Servicio.FirstOrDefaultAsync(r => r.Id == id);
+            var servicio = await _context.Servicio.FirstOrDefaultAsync(r => r.id == id);
             if (servicio == null)
             {
                 return new Response { Mensaje = "Este servicio no existe" };

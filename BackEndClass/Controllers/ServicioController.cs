@@ -47,9 +47,9 @@ namespace BackEndClass.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Servicio>> DeleteServicio(Servicio item)
+        public async Task<ActionResult<Servicio>> DeleteServicio(int id)
         {
-            return Ok(await _servicioAppService.DeleteServicio(item));
+            return Ok(await _servicioAppService.DeleteServicio(id));
         }
     }
 }
