@@ -16,7 +16,7 @@ namespace BackEndClass.AppServices
         private readonly MWSContext _context;
         private readonly ServicioDomainService _servicioDomainService;
 
-        public TipoUsuarioAppService(MWSContext context, ServicioDomainService servicioDomainService)
+        public ServicioAppService(MWSContext context, ServicioDomainService servicioDomainService)
         {
             _context = context;
             _servicioDomainService = servicioDomainService;
