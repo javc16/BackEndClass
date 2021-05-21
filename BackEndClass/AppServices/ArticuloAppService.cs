@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BackEndClass.Models.DTOs;
+using BackEndClass.AppServices.Interfaces;
 
 namespace BackEndClass.AppServices
 {

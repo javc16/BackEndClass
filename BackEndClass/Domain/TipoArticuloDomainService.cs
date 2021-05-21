@@ -12,7 +12,7 @@ namespace BackEndClass.Domain
         {
             if (string.IsNullOrEmpty(descripcion))
             {
-                return Constantes.CampoObligatorio;
+                return Constantes.CampoObligatorio+"descripcion";
             }
 
             return Constantes.ValidacionConExito;
@@ -22,7 +22,7 @@ namespace BackEndClass.Domain
         {
             if (string.IsNullOrEmpty(tipo))
             {
-                return Constantes.CampoObligatorio;
+                return Constantes.CampoObligatorio+"tipo";
             }
 
             return Constantes.ValidacionConExito;

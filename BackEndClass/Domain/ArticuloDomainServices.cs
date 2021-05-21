@@ -8,50 +8,50 @@ namespace BackEndClass.Domain
 {
     public class ArticuloDomainService
     {
-        public string ValidarNombre(string Nombre)
+        public string ValidarNombre(string nombre)
         {
-            if (String.IsNullOrEmpty(Nombre))
+            if (String.IsNullOrEmpty(nombre))
             {
-                return Constantes.CampoObligatorio;
+                return Constantes.CampoObligatorio+"nombre";
             }
 
             return Constantes.ValidacionConExito;
         }
 
-        public string ValidarDescripcion(string Descripcion)
+        public string ValidarDescripcion(string descripcion)
         {
-            if (string.IsNullOrEmpty(Descripcion))
+            if (string.IsNullOrEmpty(descripcion))
             {
-                return Constantes.CampoObligatorio;
+                return Constantes.CampoObligatorio+ "descripcion";
             }
 
             return Constantes.ValidacionConExito;
         }
-        public string ValidarAlias(string Alias)
+        public string ValidarAlias(string alias)
         {
-            if (string.IsNullOrEmpty(Alias))
+            if (string.IsNullOrEmpty(alias))
             {
-                return Constantes.CampoObligatorio;
-            }
-
-            return Constantes.ValidacionConExito;
-        }
-
-        public string ValidarPrecio(string precio)
-        {
-            if (string.IsNullOrEmpty(precio))
-            {
-                return Constantes.CampoObligatorio;
+                return Constantes.CampoObligatorio+"alias";
             }
 
             return Constantes.ValidacionConExito;
         }
 
-        public string ValidarBussines(decimal Precio)
+        public string ValidarPrecio(decimal precio)
         {
-            if (Precio==0)
+            if (precio ==0)
             {
-                return Constantes.CampoObligatorio;
+                return Constantes.CampoObligatorio+"precio";
+            }
+
+            return Constantes.ValidacionConExito;
+        }
+
+        public string ValidarBussines(string empresa)
+        {
+            if (string.IsNullOrEmpty(empresa))
+            {
+                return Constantes.CampoObligatorio+"empresa";
             }
 
             return Constantes.ValidacionConExito;

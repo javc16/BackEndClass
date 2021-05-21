@@ -1,4 +1,5 @@
-﻿using BackEndClass.Context;
+﻿using BackEndClass.AppServices.Interfaces;
+using BackEndClass.Context;
 using BackEndClass.Domain;
 using BackEndClass.Helpers;
 using BackEndClass.Models;
@@ -43,7 +44,7 @@ namespace BackEndClass.AppServices
         public async Task<Response> PostTipoUsuario(TipoUsuario tipoUsuario)
         {
             string mensaje = _userTypeDomainService.ValidarDescripcion(tipoUsuario.Descripcion);
-            if (!string.IsNullOrEmpty(mensaje) && !mensaje.Equals(Constantes.ValidacionConExito)) 
+            if (!mensaje.Equals(Constantes.ValidacionConExito)) 
             {
                 return new Response { Mensaje = mensaje };
             }                

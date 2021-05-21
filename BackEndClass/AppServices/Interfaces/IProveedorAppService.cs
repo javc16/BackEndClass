@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BackEndClass.Models.DTOs;
 
-namespace BackEndClass.AppServices
+namespace BackEndClass.AppServices.Interfaces
 {
     public interface IProveedorAppService
     {

@@ -1,4 +1,5 @@
 ﻿using BackEndClass.AppServices;
+using BackEndClass.AppServices.Interfaces;
 using BackEndClass.Helpers;
 using BackEndClass.Models;
 using BackEndClass.Models.DTOs;
