@@ -46,7 +46,7 @@ namespace BackEndClass.Models.DTOs
 
         public static Servicio DeDTOAModelo(ServicioDTO servicioDTO)
         {
-            return servicioDTO != null ? new Servicio.Builder(servicioDTO.Descripcion).conEstado(servicioDTO.Estado).Construir() : null;
+            return servicioDTO != null ? new Servicio.Builder(servicioDTO.Descripcion,servicioDTO.Alias,servicioDTO.Precio,servicioDTO.Nombre).conEstado(servicioDTO.Estado).Construir() : null;
         }
     }
 }

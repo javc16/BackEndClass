@@ -1,5 +1,6 @@
 using BackEndClass.AppServices;
 using BackEndClass.Context;
+using BackEndClass.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -49,18 +50,34 @@ namespace BackEndClass
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BackEndClass", Version = "v1" });
             });
 
-            services.AddScoped<IProveedorAppService, ProveedorAppService>();
-            services.AddScoped<IServicioAppService, ServicioAppService>();
-            services.AddScoped<IServicioAppService, ServicioAppService>();
-            //articulos mal declarado
-            // services.AddScoped<ITipoArticuloAppService, TipoArticuloAppService>();  mal declarada la interfaz
-            // services.AddScoped<ITipoServicioAppService, TipoServicioAppService>(); mal declarada la interfaz
+
+
+            //Aplication Services
+            services.AddScoped<IServicioAppService, ServicioAppService>();       
+            services.AddScoped<ITipoArticuloAppService, TipoArticuloAppService>();  
+            services.AddScoped<ITipoServicioAppService, TipoServicioAppService>(); 
             services.AddScoped<ITipoUsuarioAppService, TipoUsuarioAppService>();
             services.AddScoped<IUsuarioAppService, UsuarioAppService>();
+            services.AddScoped<IProveedorAppService, ProveedorAppService>();
+            services.AddScoped<IArticuloAppService, ArticuloAppService>();
 
+
+
+            //Domain Services
+            services.AddScoped<ServicioDomainService>();
+            services.AddScoped<TipoArticuloDomainService>();
+            services.AddScoped<TipoServicioDomainService>();
+            services.AddScoped<TipoUsuarioDomainService>();
+            services.AddScoped<UsuarioDomainService>();
+            services.AddScoped<ArticuloDomainService>();
+            services.AddScoped<ProveedorDomainService>();
+
+            //Controlers
             services.AddControllersWithViews()
             .AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

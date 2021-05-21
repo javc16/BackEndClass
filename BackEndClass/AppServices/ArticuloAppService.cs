@@ -11,12 +11,12 @@ using BackEndClass.Models.DTOs;
 
 namespace BackEndClass.AppServices
 {
-    public class ArticuloAppServices: IArticuloAppService
+    public class ArticuloAppService: IArticuloAppService
     {
         private readonly MWSContext _context;
         private readonly ArticuloDomainService _ArticuloDomainService;
 
-        public ArticuloAppServices(MWSContext context, ArticuloDomainService ArticuloDomainService)
+        public ArticuloAppService(MWSContext context, ArticuloDomainService ArticuloDomainService)
         {
             _context = context;
             _ArticuloDomainService = ArticuloDomainService;
