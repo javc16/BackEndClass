@@ -44,7 +44,7 @@ namespace BackEndClass.AppServices
         public async Task<Response> PostTipoArticulo(TipoArticulo tipoArticulo)
         {
             string mensaje = _tipoArticuloDomainService.ValidarDescripcion(tipoArticulo.Descripcion);
-            if (String.IsNullOrEmpty(mensaje))
+            if (!mensaje.Equals(Constantes.ValidacionConExito))
             {
                 return new Response { Mensaje = mensaje };
             }

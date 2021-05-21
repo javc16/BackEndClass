@@ -45,7 +45,7 @@ namespace BackEndClass.AppServices
         public async Task<Response> PostProveedor(Proveedor proveedor)
         {
             string mensaje = _proveedorDomainService.ValidarNombre(proveedor.Nombre);
-            if (!String.IsNullOrEmpty(mensaje))
+            if (!mensaje.Equals(Constantes.ValidacionConExito))
             {
                 return new Response { Mensaje = mensaje };
             }

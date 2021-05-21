@@ -44,13 +44,13 @@ namespace BackEndClass.AppServices
         public async Task<Response> PostUsuario(Usuario usuario)
         {
             string mensaje = _usuarioDomainService.ValidarNombre(usuario.Nombre);
-            if (!String.IsNullOrEmpty(mensaje))
+            if (!mensaje.Equals(Constantes.ValidacionConExito))
             {
                 return new Response { Mensaje = mensaje };
             }
 
             mensaje = _usuarioDomainService.ValidarApellido(usuario.Apellido);
-            if (!String.IsNullOrEmpty(mensaje))
+            if (!mensaje.Equals(Constantes.ValidacionConExito))
             {
                 return new Response { Mensaje = mensaje };
             }
