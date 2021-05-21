@@ -13,7 +13,8 @@ namespace BackEndClass.Models
         public string Alias { get; set; }
         public decimal Precio { get; set; }
         public int Estado { get; set; }
-
+        public int IdTipoServicio { get; set; }
+        public TipoServicio TipoServicio { get; set; }
         public sealed class Builder
         {
             private readonly Servicio _servicio;

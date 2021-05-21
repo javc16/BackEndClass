@@ -1,5 +1,7 @@
 ﻿using BackEndClass.AppServices;
+using BackEndClass.Helpers;
 using BackEndClass.Models;
+using BackEndClass.Models.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,7 +24,7 @@ namespace BackEndClass.Controllers
 
 
         [HttpGet]
-        public ActionResult<IEnumerable<TipoServicio>> GetAll()
+        public ActionResult<IEnumerable<TipoServicioDTO>> GetAll()
         {
             var result = _tipoServicioAppService.GetAll();
             return Ok(result);
@@ -30,25 +32,25 @@ namespace BackEndClass.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TipoServicio>> GetById(long id)
+        public async Task<ActionResult<Response>> GetById(long id)
         {
             return Ok(await _tipoServicioAppService.GetById(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult<TipoServicio>> PostTipoServicio(TipoServicio item)
+        public async Task<ActionResult<Response>> PostTipoServicio(TipoServicio item)
         {
             return Ok(await _tipoServicioAppService.PostTipoServicio(item));
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<TipoServicio>> PutTipoServicio(TipoServicio item)
+        public async Task<ActionResult<Response>> PutTipoServicio(TipoServicio item)
         {
             return Ok(await _tipoServicioAppService.PutTipoServicio(item));
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<TipoServicio>> DeleteById(int id)
+        public async Task<ActionResult<Response>> DeleteById(int id)
         {
             return Ok(await _tipoServicioAppService.DeleteTipoServicio(id));
         }

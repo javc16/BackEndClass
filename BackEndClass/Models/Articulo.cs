@@ -14,7 +14,8 @@ namespace BackEndClass.Models
         public string Alias { get; set; }
         public decimal Precio { get; set; }
         public int Estado { get; set; }
-
+        public int IdArticulo { get; set; }
+        public TipoArticulo TipoArticulo { get; set; }
         public sealed class Builder 
         {
             private readonly Articulo _articulo;

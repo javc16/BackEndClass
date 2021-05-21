@@ -1,4 +1,5 @@
 ﻿using BackEndClass.AppServices;
+using BackEndClass.Helpers;
 using BackEndClass.Models;
 using BackEndClass.Models.DTOs;
 using Microsoft.AspNetCore.Http;
@@ -31,25 +32,25 @@ namespace BackEndClass.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TipoUsuario>> GetById(long id)
+        public async Task<ActionResult<Response>> GetById(long id)
         {
             return Ok(await _tipoUsuarioAppService.GetById(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult<TipoUsuario>> Post(TipoUsuario item)
+        public async Task<ActionResult<Response>> Post(TipoUsuario item)
         {
             return Ok(await _tipoUsuarioAppService.PostTipoUsuario(item));
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<TipoUsuario>> PutCiudadano(TipoUsuario item)
+        public async Task<ActionResult<Response>> PutCiudadano(TipoUsuario item)
         {
             return Ok(await _tipoUsuarioAppService.PutTipoUsuario(item));
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<TipoUsuario>> DeleteById(int id)
+        public async Task<ActionResult<Response>> DeleteById(int id)
         {
             return Ok(await _tipoUsuarioAppService.DeleteTipoUsuario(id));
         }

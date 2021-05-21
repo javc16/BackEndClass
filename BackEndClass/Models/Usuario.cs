@@ -13,7 +13,9 @@ namespace BackEndClass.Models
         public string Email { get; set; }
         public string Telefono { get; set; }
         public int Estado { get; set; }
-
+        public int IdTipoUsuario { get; set; }
+        public TipoUsuario TipoUsuario { get; set; }
+        List<Recomendacion> Recomendaciones { get; set; }
         public sealed class Builder
         {
             private readonly Usuario _usuario;

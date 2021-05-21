@@ -30,8 +30,7 @@ namespace BackEndClass.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
         {
-            //optionBuilder.UseSqlServer(@"Server=38.17.54.162,51688;Database=MechanicalWorkShopSystem30042021;User Id=devops;Password=Yf4-Sf");
-            optionBuilder.UseSqlServer(@"Server=38.17.54.162,51688;Database=MechanicalWorkShopSystem30042021;User Id=tempWork;Password=Temp123456");
+            optionBuilder.UseSqlServer(@"Server=38.17.54.162,51688;Database=MWS;User Id=sa;Password=UM3LgE");
         }
     }
 }

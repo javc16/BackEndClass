@@ -1,5 +1,7 @@
 using BackEndClass.AppServices;
+using BackEndClass.Helpers;
 using BackEndClass.Models;
+using BackEndClass.Models.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,32 +23,32 @@ namespace BackEndClass.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Proveedor>> GetAll()
+        public ActionResult<IEnumerable<ProveedorDTO>> GetAll()
         {
             var result = _proveedorAppService.GetAll();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Proveedor>> GetById(long id)
+        public async Task<ActionResult<Response>> GetById(long id)
         {
             return Ok(await _proveedorAppService.GetById(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult<Proveedor>> Post(Proveedor item)
+        public async Task<ActionResult<Response>> Post(Proveedor item)
         {
             return Ok(await _proveedorAppService.PostProveedor(item));
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Proveedor>> Put(int id, Proveedor item)
+        public async Task<ActionResult<Response>> Put(int id, Proveedor item)
         {
             return Ok(await _proveedorAppService.PutProveedor(item));
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Proveedor>> DeleteById(int id)
+        public async Task<ActionResult<Response>> DeleteById(int id)
         {
             return Ok(await _proveedorAppService.DeleteProveedor(id));
         }

@@ -1,4 +1,5 @@
 using BackEndClass.AppServices;
+using BackEndClass.Helpers;
 using BackEndClass.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ namespace BackEndClass.Controllers
 
 
         [HttpGet]
-        public  ActionResult<IEnumerable<Articulo>> GetAll()
+        public  ActionResult<IEnumerable<ArticuloDTO>> GetAll()
         {
             var result = _articuloAppService.GetAll();
             return Ok(result);
@@ -30,25 +31,25 @@ namespace BackEndClass.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Articulo>> GetById(long id)
+        public async Task<ActionResult<Response>> GetById(long id)
         {
             return Ok(await _articuloAppService.GetById(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult<Articulo>> Post(Articulo item)
+        public async Task<ActionResult<Response>> Post(Articulo item)
         {
             return Ok(await _articuloAppService.PostArticulo(item));
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Articulo>> PutCiudadano(Articulo item)
+        public async Task<ActionResult<Response>> PutCiudadano(Articulo item)
         {
             return Ok(await _articuloAppService.PutArticulo(item));
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Articulo>> DeleteById(int id)
+        public async Task<ActionResult<Response>> DeleteById(int id)
         {
             return Ok(await _articuloAppService.DeleteArticulo(id));
         }

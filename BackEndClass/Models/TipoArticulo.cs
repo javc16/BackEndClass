@@ -11,6 +11,7 @@ namespace BackEndClass.Models
         public string Descripcion { get; set; }
         public string Tipo { get; set; }
         public int Estado { get; set; }
+        List<Articulo> Articulos { get; set; }
 
         public sealed class Builder
         {

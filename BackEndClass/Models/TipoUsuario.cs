@@ -10,7 +10,7 @@ namespace BackEndClass.Models
         public int Id { get; set; }
         public string Descripcion { get; set; }
         public int Estado { get; set; }
-
+        List<Usuario> Usuarios { get; set; }
         public sealed class Builder 
         {
             private readonly TipoUsuario _tipoUsuario;

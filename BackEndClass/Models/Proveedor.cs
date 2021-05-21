@@ -15,7 +15,10 @@ namespace BackEndClass.Models
         public string Empresa { get; set; }
         public string Direccion { get; set; }
         public int Estado { get; set; }
-    public sealed class Builder
+        List<Recomendacion> Recomendaciones { get; set; }
+        public int IdMestroProveedor { get; set; }
+        public MaestroProveedor MaestroProveedor { get; set; }
+        public sealed class Builder
         {
             private readonly Proveedor _proveedor;
 
