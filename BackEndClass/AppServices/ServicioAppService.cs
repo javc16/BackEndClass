@@ -60,6 +60,13 @@ namespace BackEndClass.AppServices
             return new Response { Mensaje = "Servicio agregado correctamente" };
         }
 
+        public async Task<Response> PutServicio(Servicio servicio)
+        {
+            _context.Entry(servicio).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return new Response { Mensaje = $"Servicio {servicio.Nombre} modificado correctamente" };
+        }
+
         public async Task<Response> DeleteServicio(int id)
         {
             var servicio = await _context.Servicio.FindAsync(id);
