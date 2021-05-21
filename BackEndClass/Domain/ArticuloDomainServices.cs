@@ -10,7 +10,7 @@ namespace BackEndClass.Domain
     {
         public string ValidarNombre(string nombre)
         {
-            if (String.IsNullOrEmpty(nombre))
+            if (string.IsNullOrEmpty(nombre))
             {
                 return Constantes.CampoObligatorio+"nombre";
             }
