@@ -44,7 +44,7 @@ namespace BackEndClass.AppServices
         public async Task<Response> PostServicio(Servicio servicio)
         {
             string mensaje = _servicioDomainService.ValidarDescripcion(servicio.Descripcion);
-            if (!String.IsNullOrEmpty(mensaje))
+            if (!mensaje.Equals(Constantes.ValidacionConExito))
             {
                 return new Response { Mensaje = mensaje };
             }

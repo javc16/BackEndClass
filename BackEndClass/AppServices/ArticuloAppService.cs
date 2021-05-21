@@ -24,26 +24,26 @@ namespace BackEndClass.AppServices
 
         public IEnumerable<ArticuloDTO> GetAll()
         {
-             var Articulo = _context.Articulo.Where(x => x.Estado == Constantes.Activo);
+            var Articulo = _context.Articulo.Where(x => x.Estado == Constantes.Activo);
             var articuloDTO = ArticuloDTO.DeModeloADTO(Articulo);
             return articuloDTO;
         }
 
         public async Task<Response> GetById(long id)
         {
-            var Articulo = await _context.Articulo.FirstOrDefaultAsync(r => r.Id == id);
-            if (Articulo == null)
+            var articulo = await _context.Articulo.FirstOrDefaultAsync(r => r.Id == id);
+            if (articulo == null)
             {
                 return new Response { Mensaje = "Este tipo de articulo no existe" };
             }
-
-            return new Response { Datos = Articulo };
+            var data = ArticuloDTO.DeModeloADTO(articulo);
+            return new Response { Datos = data };
         }
 
         public async Task<Response> PostArticulo(Articulo Articulo)
         {
             string mensaje = _ArticuloDomainService.ValidarDescripcion(Articulo.Descripcion);
-            if (!String.IsNullOrEmpty(mensaje))
+            if (!mensaje.Equals(Constantes.ValidacionConExito))
             {
                 return new Response { Mensaje = mensaje };
             }
