@@ -43,7 +43,7 @@ namespace BackEndClass.AppServices
         public async Task<Response> PostTipoServicio(TipoServicio tipoServicio)
         {
             string mensaje = _tipoServicioDomainService.ValidarDescripcion(tipoServicio.Descripcion);
-            if (!String.IsNullOrEmpty(mensaje))
+            if (String.IsNullOrEmpty(mensaje))
             {
                 return new Response { Mensaje = mensaje };
             }
