@@ -73,7 +73,7 @@ namespace BackEndClass.AppServices
             var usuario = await _context.Usuario.FindAsync(id);
             if (usuario == null)
             {
-                return new Response { Mensaje = $"No tenemos un usuario con ese id" }; ;
+                return new Response { Mensaje = $"No tenemos un usuario con id {id}" }; ;
             }
             usuario.Estado = 0;
             _context.Entry(usuario).State = EntityState.Modified;
@@ -86,7 +86,7 @@ namespace BackEndClass.AppServices
         {
             _context.Entry(usuario).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return new Response { Mensaje = $"Tipo de Usuario {usuario.Nombre} modificado correctamente" };
+            return new Response { Mensaje = $"Usuario {usuario.Nombre} modificado correctamente" };
         }
     }
 }

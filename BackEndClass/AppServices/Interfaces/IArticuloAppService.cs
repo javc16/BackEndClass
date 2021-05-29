@@ -1,5 +1,6 @@
 using BackEndClass.Helpers;
 using BackEndClass.Models;
+using BackEndClass.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

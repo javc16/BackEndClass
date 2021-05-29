@@ -1,12 +1,9 @@
-using BackEndClass.AppServices;
 using BackEndClass.AppServices.Interfaces;
 using BackEndClass.Helpers;
 using BackEndClass.Models;
-using Microsoft.AspNetCore.Http;
+using BackEndClass.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BackEndClass.Controllers
@@ -17,7 +14,7 @@ namespace BackEndClass.Controllers
     {
         private readonly IArticuloAppService _articuloAppService;
 
-        public ArticuloController(ArticuloAppService articuloAppService)
+        public ArticuloController(IArticuloAppService articuloAppService)
         {
             _articuloAppService = articuloAppService;
         }

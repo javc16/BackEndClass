@@ -73,7 +73,7 @@ namespace BackEndClass.AppServices
             var tipoArticulo = await _context.TipoServicio.FindAsync(id);
             if (tipoArticulo == null)
             {
-                return new Response { Mensaje = $"No tenemos un tipo de articulo con ese id" }; ;
+                return new Response { Mensaje = $"No tenemos un tipo de articulo con id {id}" }; ;
             }
             tipoArticulo.Estado = 0;
             _context.Entry(tipoArticulo).State = EntityState.Modified;

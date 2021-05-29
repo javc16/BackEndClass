@@ -72,7 +72,7 @@ namespace BackEndClass.AppServices
             var tipoUsuario = await _context.TipoUsuario.FindAsync(id);
             if (tipoUsuario == null)
             {
-                return new Response { Mensaje = $"No tenemos un tipo de usuario con ese id" }; ;
+                return new Response { Mensaje = $"No tenemos un tipo de usuario con id {id}" }; ;
             }
             tipoUsuario.Estado = Constantes.Inactivo;
             _context.Entry(tipoUsuario).State = EntityState.Modified;

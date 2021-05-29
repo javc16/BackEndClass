@@ -72,7 +72,7 @@ namespace BackEndClass.AppServices
             var tipoServicio = await _context.TipoServicio.FindAsync(id);
             if (tipoServicio == null)
             {
-                return new Response { Mensaje = $"No tenemos un tipo de servicio con ese id" }; ;
+                return new Response { Mensaje = $"No tenemos un tipo de servicio con id {id}" }; ;
             }
             tipoServicio.Estado = 0;
             _context.Entry(tipoServicio).State = EntityState.Modified;

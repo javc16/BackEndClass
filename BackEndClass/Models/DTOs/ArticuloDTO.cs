@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace BackEndClass.Models
+namespace BackEndClass.Models.DTOs
 {
     public class ArticuloDTO
     {
@@ -14,6 +14,7 @@ namespace BackEndClass.Models
         public string Alias { get; set; }
         public decimal Precio { get; set; }
         public int Estado { get; set; }
+        public int IdArticulo { get; set; }
 
         public static ArticuloDTO DeModeloADTO(Articulo articulo) 
         {
