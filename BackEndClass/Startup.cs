@@ -31,22 +31,22 @@ namespace BackEndClass
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy(name: "CorsPolicy",
-            //                    builder =>
-            //                    {
-            //                        builder.AllowAnyOrigin()
-            //                                .AllowAnyMethod()
-            //                                .AllowAnyHeader();
-            //                    });
-            //});
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            services.AddCors(options =>
             {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
+                options.AddPolicy(name: "CorsPolicy",
+                                builder =>
+                                {
+                                    builder.AllowAnyOrigin()
+                                            .AllowAnyMethod()
+                                            .AllowAnyHeader();
+                                });
+            });
+            //services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            //{
+            //    builder.AllowAnyOrigin()
+            //           .AllowAnyMethod()
+            //           .AllowAnyHeader();
+            //}));
 
             services.AddDbContext<MWSContext>(
         options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
@@ -101,7 +101,7 @@ namespace BackEndClass
 
             app.UseRouting();
 
-            app.UseCors("MyPolicy");
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 
