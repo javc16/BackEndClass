@@ -41,38 +41,40 @@ namespace BackEndClass.AppServices
             return new Response { Datos = data };
         }
 
-        public async Task<Response> PostTipoUsuario(TipoUsuario tipoUsuario)
+        public async Task<Response> PostTipoUsuario(TipoUsuarioDTO tipoUsuarioDTO)
         {
-            string mensaje = _userTypeDomainService.ValidarDescripcion(tipoUsuario.Descripcion);
+            string mensaje = _userTypeDomainService.ValidarDescripcion(tipoUsuarioDTO.Descripcion);
             if (!mensaje.Equals(Constantes.ValidacionConExito)) 
             {
                 return new Response { Mensaje = mensaje };
             }                
             
-            var SavedUser = await _context.TipoUsuario.FirstOrDefaultAsync(r => r.Descripcion == tipoUsuario.Descripcion);
+            var SavedUser = await _context.TipoUsuario.FirstOrDefaultAsync(r => r.Descripcion == tipoUsuarioDTO.Descripcion);
             if (SavedUser != null)
             {
                 return new Response { Mensaje = "Este tipo de usuario ya existe en el sistema" };
             }
-
+            var tipoUsuario = TipoUsuarioDTO.DeDTOAModelo(tipoUsuarioDTO);
             _context.TipoUsuario.Add(tipoUsuario);
             await _context.SaveChangesAsync();
             return new Response { Mensaje = "Tipo de Usuario agregado correctamente" };
         }
 
-        public async Task<Response> PutTipoUsuario(TipoUsuario tipoUsuario)
+        public async Task<Response> PutTipoUsuario(TipoUsuarioDTO tipoUsuarioDTO)
         {
+            var tipoUsuario = TipoUsuarioDTO.DeDTOAModelo(tipoUsuarioDTO);
+
             _context.Entry(tipoUsuario).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return new Response { Mensaje = $"Tipo de Usuario {tipoUsuario.Descripcion} modificado correctamente" };
         }
 
-        public async Task<Response> DeleteTipoUsuario(int id)
+        public async Task<Response> DeleteTipoUsuario(TipoUsuarioDTO tipoUsuarioDTO)
         {
-            var tipoUsuario = await _context.TipoUsuario.FindAsync(id);
+            var tipoUsuario = await _context.TipoUsuario.FindAsync(tipoUsuarioDTO.Id);
             if (tipoUsuario == null)
             {
-                return new Response { Mensaje = $"No tenemos un tipo de usuario con id {id}" }; ;
+                return new Response { Mensaje = $"No tenemos un tipo de usuario con id {tipoUsuarioDTO.Id}" }; ;
             }
             tipoUsuario.Estado = Constantes.Inactivo;
             _context.Entry(tipoUsuario).State = EntityState.Modified;

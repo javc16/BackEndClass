@@ -31,6 +31,7 @@ namespace BackEndClass.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
         {
             optionBuilder.UseSqlServer(@"Server=38.17.54.162,51688;Database=MWS;User Id=sa;Password=UM3LgE");
+            //optionBuilder.UseSqlServer(@"Server=DESKTOP-AICR3S2;Database=Cliente;User Id=sa;Password=1234");
         }
     }
 }

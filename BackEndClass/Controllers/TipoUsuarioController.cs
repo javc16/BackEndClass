@@ -39,21 +39,22 @@ namespace BackEndClass.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Response>> Post(TipoUsuario item)
+        public async Task<ActionResult<Response>> Post(TipoUsuarioDTO item)
         {
             return Ok(await _tipoUsuarioAppService.PostTipoUsuario(item));
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Response>> PutCiudadano(TipoUsuario item)
+        public async Task<ActionResult<Response>> PutCiudadano(TipoUsuarioDTO item)
         {
             return Ok(await _tipoUsuarioAppService.PutTipoUsuario(item));
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Response>> DeleteById(int id)
+       
+        [HttpPut]
+        public async Task<ActionResult<Response>> DeleteById(TipoUsuarioDTO item)
         {
-            return Ok(await _tipoUsuarioAppService.DeleteTipoUsuario(id));
+            return Ok(await _tipoUsuarioAppService.DeleteTipoUsuario(item));
         }
 
     }

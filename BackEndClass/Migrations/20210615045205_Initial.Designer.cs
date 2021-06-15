@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackEndClass.Migrations
 {
     [DbContext(typeof(MWSContext))]
-    [Migration("20210521042951_RelationFor_Recomendacion_WithProveedor_and_Usuario")]
-    partial class RelationFor_Recomendacion_WithProveedor_and_Usuario
+    [Migration("20210615045205_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,15 +37,38 @@ namespace BackEndClass.Migrations
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdArticulo")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("TipoArticuloid")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("TipoArticuloid");
+
                     b.ToTable("Articulo");
+                });
+
+            modelBuilder.Entity("BackEndClass.Models.MaestroProveedor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MaestroProveedor");
                 });
 
             modelBuilder.Entity("BackEndClass.Models.Proveedor", b =>
@@ -70,6 +93,12 @@ namespace BackEndClass.Migrations
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdMestroProveedor")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MaestroProveedorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
@@ -77,6 +106,8 @@ namespace BackEndClass.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MaestroProveedorId");
 
                     b.ToTable("Proveedor");
                 });
@@ -128,13 +159,21 @@ namespace BackEndClass.Migrations
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdTipoServicio")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("TipoServicioid")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
+
+                    b.HasIndex("TipoServicioid");
 
                     b.ToTable("Servicio");
                 });
@@ -234,6 +273,24 @@ namespace BackEndClass.Migrations
                     b.ToTable("Usuario");
                 });
 
+            modelBuilder.Entity("BackEndClass.Models.Articulo", b =>
+                {
+                    b.HasOne("BackEndClass.Models.TipoArticulo", "TipoArticulo")
+                        .WithMany()
+                        .HasForeignKey("TipoArticuloid");
+
+                    b.Navigation("TipoArticulo");
+                });
+
+            modelBuilder.Entity("BackEndClass.Models.Proveedor", b =>
+                {
+                    b.HasOne("BackEndClass.Models.MaestroProveedor", "MaestroProveedor")
+                        .WithMany()
+                        .HasForeignKey("MaestroProveedorId");
+
+                    b.Navigation("MaestroProveedor");
+                });
+
             modelBuilder.Entity("BackEndClass.Models.Recomendacion", b =>
                 {
                     b.HasOne("BackEndClass.Models.Proveedor", "Proveedor")
@@ -247,6 +304,15 @@ namespace BackEndClass.Migrations
                     b.Navigation("Proveedor");
 
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("BackEndClass.Models.Servicio", b =>
+                {
+                    b.HasOne("BackEndClass.Models.TipoServicio", "TipoServicio")
+                        .WithMany()
+                        .HasForeignKey("TipoServicioid");
+
+                    b.Navigation("TipoServicio");
                 });
 
             modelBuilder.Entity("BackEndClass.Models.Usuario", b =>
