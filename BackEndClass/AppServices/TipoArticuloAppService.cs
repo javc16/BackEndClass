@@ -41,41 +41,41 @@ namespace BackEndClass.AppServices
             return new Response { Datos = data };
         }
 
-        public async Task<Response> PostTipoArticulo(TipoArticulo tipoArticulo)
+        public async Task<Response> PostTipoArticulo(TipoArticuloDTO tipoArticuloDTO)
         {
-            string mensaje = _tipoArticuloDomainService.ValidarDescripcion(tipoArticulo.Descripcion);
+            string mensaje = _tipoArticuloDomainService.ValidarDescripcion(tipoArticuloDTO.Descripcion);
             if (!mensaje.Equals(Constantes.ValidacionConExito))
             {
                 return new Response { Mensaje = mensaje };
             }
 
-            var GuardarArticulo = await _context.TipoArticulo.FirstOrDefaultAsync(r => r.Descripcion == tipoArticulo.Descripcion);
+            var GuardarArticulo = await _context.TipoArticulo.FirstOrDefaultAsync(r => r.Descripcion == tipoArticuloDTO.Descripcion);
             if (GuardarArticulo != null)
             {
                 return new Response { Mensaje = "Este tipo de articulo ya existe en el sistema" };
             }
-
+            var tipoArticulo = TipoArticuloDTO.DeDTOAModelo(tipoArticuloDTO);
             _context.TipoArticulo.Add(tipoArticulo);
             await _context.SaveChangesAsync();
             return new Response { Mensaje = "Tipo de Articulo agregado correctamente" };
         }
 
-        public async Task<Response> PutTipoArticulo(TipoArticulo tipoArticulo)
+        public async Task<Response> PutTipoArticulo(TipoArticuloDTO tipoArticuloDTO)
         {
-            _context.Entry(tipoArticulo).State = EntityState.Modified;
+            _context.Entry(tipoArticuloDTO).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return new Response { Mensaje = $"Tipo de Articulo {tipoArticulo.Descripcion} modificado correctamente" };
+            return new Response { Mensaje = $"Tipo de Articulo {tipoArticuloDTO.Descripcion} modificado correctamente" };
        
         }
 
-        public async Task<Response> DeleteTipoArticulo(int id)
+        public async Task<Response> DeleteTipoArticulo(TipoArticuloDTO tipoArticuloDTO)
         {
-            var tipoArticulo = await _context.TipoServicio.FindAsync(id);
+            var tipoArticulo = await _context.TipoArticulo.FindAsync(tipoArticuloDTO.id);
             if (tipoArticulo == null)
             {
-                return new Response { Mensaje = $"No tenemos un tipo de articulo con id {id}" }; ;
+                return new Response { Mensaje = $"No tenemos un tipo de articulo con id {tipoArticuloDTO.id}" }; ;
             }
-            tipoArticulo.Estado = 0;
+            tipoArticulo.Estado = Constantes.Inactivo;
             _context.Entry(tipoArticulo).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return new Response { Mensaje = $"Tipo de Articulo {tipoArticulo.Descripcion} eliminado correctamente" };

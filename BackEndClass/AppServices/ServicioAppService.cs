@@ -42,43 +42,44 @@ namespace BackEndClass.AppServices
             return new Response { Datos = data };
         }
 
-        public async Task<Response> PostServicio(Servicio servicio)
+        public async Task<Response> PostServicio(ServicioDTO servicioDTO)
         {
-            string mensaje = _servicioDomainService.ValidarDescripcion(servicio.Descripcion);
+            string mensaje = _servicioDomainService.ValidarDescripcion(servicioDTO.Descripcion);
             if (!mensaje.Equals(Constantes.ValidacionConExito))
             {
                 return new Response { Mensaje = mensaje };
             }
 
-            var GuardarServicio = await _context.Servicio.FirstOrDefaultAsync(r => r.Nombre == servicio.Nombre);
+            var GuardarServicio = await _context.Servicio.FirstOrDefaultAsync(r => r.Nombre == servicioDTO.Nombre);
             if (GuardarServicio != null)
             {
                 return new Response { Mensaje = "Este servicio ya existe en el sistema" };
             }
 
+            var servicio = ServicioDTO.DeDTOAModelo(servicioDTO);
             _context.Servicio.Add(servicio);
             await _context.SaveChangesAsync();
             return new Response { Mensaje = "Servicio agregado correctamente" };
         }
 
-        public async Task<Response> PutServicio(Servicio servicio)
+        public async Task<Response> PutServicio(ServicioDTO servicioDTO)
         {
-            _context.Entry(servicio).State = EntityState.Modified;
+            _context.Entry(servicioDTO).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return new Response { Mensaje = $"Servicio {servicio.Nombre} modificado correctamente" };
+            return new Response { Mensaje = $"Servicio {servicioDTO.Nombre} modificado correctamente" };
         }
 
-        public async Task<Response> DeleteServicio(int id)
+        public async Task<Response> DeleteServicio(ServicioDTO servicioDTO)
         {
-            var servicio = await _context.Servicio.FindAsync(id);
+            var servicio = await _context.TipoArticulo.FindAsync(servicioDTO.id);
             if (servicio == null)
             {
-                return new Response { Mensaje = $"No tenemos un servicio con ese id" }; ;
+                return new Response { Mensaje = $"No tenemos un servicio con id {servicioDTO.id}" }; ;
             }
-            servicio.Estado = 0;
+            servicio.Estado = Constantes.Inactivo;
             _context.Entry(servicio).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return new Response { Mensaje = $"Servicio {servicio.Nombre} eliminado correctamente" };
+            return new Response { Mensaje = $"Servicio {servicio.Descripcion} eliminado correctamente" };
         }
     }
 }

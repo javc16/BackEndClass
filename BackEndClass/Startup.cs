@@ -31,16 +31,19 @@ namespace BackEndClass
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: "CorsPolicy",
-                                builder =>
-                                {
-                                    builder.AllowAnyOrigin()
-                                            .AllowAnyMethod()
-                                            .AllowAnyHeader();
-                                });
-            });
+            services.AddCors();
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy(name: "CorsPolicy",
+            //                    builder =>
+            //                    {
+            //                        builder.AllowAnyOrigin()
+            //                                .AllowAnyMethod()
+            //                                .AllowAnyHeader();
+            //                    });
+            //});
+
             //services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             //{
             //    builder.AllowAnyOrigin()
@@ -100,8 +103,16 @@ namespace BackEndClass
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
 
-            app.UseCors("CorsPolicy");
+            //app.UseCors("CorsPolicy");
+
+            //app.UseCors("MyPolicy");
 
             app.UseAuthorization();
 

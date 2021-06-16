@@ -12,8 +12,8 @@ namespace BackEndClass.AppServices.Interfaces
     {
         IEnumerable<ServicioDTO> GetAll();
         Task<Response> GetById(long id);
-        Task<Response> PostServicio(Servicio servicio);
-        Task<Response> PutServicio(Servicio servicio);
-        Task<Response> DeleteServicio(int id);
+        Task<Response> PostServicio(ServicioDTO servicio);
+        Task<Response> PutServicio(ServicioDTO servicio);
+        Task<Response> DeleteServicio(ServicioDTO servicio);
     }
 }
