@@ -38,22 +38,22 @@ namespace BackEndClass.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<Response>> Post(Usuario item)
+        public async Task<ActionResult<Response>> Post(UsuarioDTO item)
         {
             return Ok(await _usuarioAppService.PostUsuario(item));
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Response>> PutUsuario(Usuario item)
+        public async Task<ActionResult<Response>> PutUsuario(UsuarioDTO item)
         {
             return Ok(await _usuarioAppService.PutUsuario(item));
         }
 
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Response>> DeleteById(int id)
+        [HttpPut]
+        public async Task<ActionResult<Response>> DeleteById(UsuarioDTO item)
         {
-            return Ok(await _usuarioAppService.DeleteUsuario(id));
+            return Ok(await _usuarioAppService.DeleteUsuario(item));
         }
     }
 }

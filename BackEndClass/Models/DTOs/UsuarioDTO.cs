@@ -45,7 +45,10 @@ namespace BackEndClass.Models.DTOs
 
         public static Usuario DeDTOAModelo(UsuarioDTO usuarioDTO)
         {
-            return usuarioDTO != null ? new Usuario.Builder(usuarioDTO.Nombre, usuarioDTO.Apellido).conEstado(usuarioDTO.Estado).Construir() : null;
+            return usuarioDTO != null ? new Usuario.Builder(usuarioDTO.Nombre,
+                                                            usuarioDTO.Apellido,
+                                                            usuarioDTO.Email,
+                                                            usuarioDTO.Telefono ).conEstado(usuarioDTO.Estado).Construir() : null;
         }
     }
 }

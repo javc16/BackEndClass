@@ -5,7 +5,6 @@ using BackEndClass.Helpers;
 using BackEndClass.Models;
 using BackEndClass.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,9 +24,9 @@ namespace BackEndClass.AppServices
 
         public IEnumerable<UsuarioDTO> GetAll()
         {
-            var usuario = _context.Usuario.Where(x => x.Estado == Constantes.Activo);
-            var usuarioDTO = UsuarioDTO.DeModeloADTO(usuario);
-            return usuarioDTO;
+            var usuarios = _context.Usuario.Where(x => x.Estado == Constantes.Activo);
+            var usuariosDTO = UsuarioDTO.DeModeloADTO(usuarios);
+            return usuariosDTO;
         }
 
         public async Task<Response> GetById(long id)
@@ -41,49 +40,51 @@ namespace BackEndClass.AppServices
             return new Response { Datos = data };
         }
 
-        public async Task<Response> PostUsuario(Usuario usuario)
+        public async Task<Response> PostUsuario(UsuarioDTO usuarioDTO)
         {
-            string mensaje = _usuarioDomainService.ValidarNombre(usuario.Nombre);
+            string mensaje = _usuarioDomainService.ValidarNombre(usuarioDTO.Nombre);
             if (!mensaje.Equals(Constantes.ValidacionConExito))
             {
                 return new Response { Mensaje = mensaje };
             }
 
-            mensaje = _usuarioDomainService.ValidarApellido(usuario.Apellido);
+            mensaje = _usuarioDomainService.ValidarApellido(usuarioDTO.Apellido);
             if (!mensaje.Equals(Constantes.ValidacionConExito))
             {
                 return new Response { Mensaje = mensaje };
             }
 
 
-            var SavedUser = await _context.Usuario.FirstOrDefaultAsync(r => r.Nombre == usuario.Nombre);
-            if (SavedUser != null)
+            var GuardarUsuario = await _context.Usuario.FirstOrDefaultAsync(r => r.Nombre == usuarioDTO.Nombre);
+            if (GuardarUsuario != null)
             {
                 return new Response { Mensaje = "Este usuario ya existe en el sistema" };
             }
-
+            var usuario = UsuarioDTO.DeDTOAModelo(usuarioDTO);
             _context.Usuario.Add(usuario);
             await _context.SaveChangesAsync();
             return new Response { Mensaje = "Usuario agregado correctamente" };
         }
 
 
-        public async Task<Response> DeleteUsuario(int id)
+        public async Task<Response> DeleteUsuario(UsuarioDTO usuarioDTO)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
+            var usuario = await _context.Usuario.FindAsync(usuarioDTO.Id);
             if (usuario == null)
             {
-                return new Response { Mensaje = $"No tenemos un usuario con id {id}" }; ;
+                return new Response { Mensaje = $"No tenemos un usuario con id {usuarioDTO.Id}" }; ;
             }
-            usuario.Estado = 0;
+            usuario.Estado = Constantes.Inactivo;
             _context.Entry(usuario).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return new Response { Mensaje = $"Usuario {usuario.Nombre} eliminado correctamente" };
         }
 
 
-        public async Task<Response> PutUsuario(Usuario usuario)
+        public async Task<Response> PutUsuario(UsuarioDTO usuarioDTO)
         {
+            var usuario = UsuarioDTO.DeDTOAModelo(usuarioDTO);
+
             _context.Entry(usuario).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return new Response { Mensaje = $"Usuario {usuario.Nombre} modificado correctamente" };

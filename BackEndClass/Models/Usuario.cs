@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BackEndClass.Models
 {
@@ -20,12 +17,14 @@ namespace BackEndClass.Models
         {
             private readonly Usuario _usuario;
 
-            public Builder(string nombre, string apellido)
+            public Builder(string nombre, string apellido, string email, string telefono)
             {
                 _usuario = new Usuario
                 {
                     Nombre = nombre,
-                    Apellido = apellido
+                    Apellido = apellido,
+                    Email = email,
+                    Telefono = telefono
                 };
             }
 

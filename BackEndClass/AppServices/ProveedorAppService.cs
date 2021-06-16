@@ -42,45 +42,47 @@ namespace BackEndClass.AppServices
             return new Response { Datos = data };
         }
 
-        public async Task<Response> PostProveedor(Proveedor proveedor)
+        public async Task<Response> PostProveedor(ProveedorDTO proveedorDTO)
         {
-            string mensaje = _proveedorDomainService.ValidarNombre(proveedor.Nombre);
+            string mensaje = _proveedorDomainService.ValidarNombre(proveedorDTO.Nombre);
             if (!mensaje.Equals(Constantes.ValidacionConExito))
             {
                 return new Response { Mensaje = mensaje };
             }
 
-            var GuardarProveedor= await _context.Proveedor.FirstOrDefaultAsync(r => r.Nombre == proveedor.Nombre);
+            var GuardarProveedor= await _context.Proveedor.FirstOrDefaultAsync(r => r.Nombre == proveedorDTO.Nombre);
             if (GuardarProveedor != null)
             {
                 return new Response { Mensaje = "Este proveedor ya existe en el sistema" };
             }
-
+            var proveedor = ProveedorDTO.DeDTOAModelo(proveedorDTO);
             _context.Proveedor.Add(proveedor);
             await _context.SaveChangesAsync();
             return new Response { Mensaje = "Proveedor agregado correctamente" };
         }
 
-        public async Task<Response> DeleteProveedor(int id)
+        public async Task<Response> PutProveedor(ProveedorDTO proveedorDTO)
         {
-            var proveedor = await _context.Proveedor.FindAsync(id);
+            var proveedor = ProveedorDTO.DeDTOAModelo(proveedorDTO);
+
+            _context.Entry(proveedor).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return new Response { Mensaje = $"Tipo de Proveedor {proveedor.Nombre} modificado correctamente" };
+        }
+
+        public async Task<Response> DeleteProveedor(ProveedorDTO proveedorDTO)
+        {
+            var proveedor = await _context.Proveedor.FindAsync(proveedorDTO.Id);
             if (proveedor == null)
             {
                 return new Response { Mensaje = $"No tenemos un proveedor con ese id" }; ;
             }
-            proveedor.Estado = 0;
+            proveedor.Estado = Constantes.Inactivo;
             _context.Entry(proveedor).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return new Response { Mensaje = $"Proveedor {proveedor.Nombre} eliminado correctamente" };
         }
 
-
-        public async Task<Response> PutProveedor(Proveedor proveedor)
-        {
-            _context.Entry(proveedor).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return new Response { Mensaje = $"Tipo de Proveedor {proveedor.Nombre} modificado correctamente" };
-        }
     }
 }
 

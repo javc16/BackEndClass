@@ -26,36 +26,37 @@ namespace BackEndClass.Models.DTOs
                 Email = proveedor.Email,
                 Telefono = proveedor.Telefono,
                 Empresa = proveedor.Empresa,
-                Direccion = proveedor.Direccion
+                Direccion = proveedor.Direccion,
+                Estado = proveedor.Estado
 
             } : null;
         }
 
-        public static IEnumerable<ProveedorDTO> DeModeloADTO(IEnumerable<Proveedor> proveedor)
+        public static IEnumerable<ProveedorDTO> DeModeloADTO(IEnumerable<Proveedor> proveedores)
         {
-            if(proveedor == null)
+            if(proveedores == null)
             {
                 return new List<ProveedorDTO>();
             }
 
-            List<ProveedorDTO> proveedorData = new List<ProveedorDTO>();
+            List<ProveedorDTO> proveedoresData = new List<ProveedorDTO>();
 
-            foreach (var item in proveedor)
+            foreach (var item in proveedores)
             {
-                proveedorData.Add(DeModeloADTO(item));
+                proveedoresData.Add(DeModeloADTO(item));
             }
 
-            return proveedorData;
+            return proveedoresData;
         }
 
         public static Proveedor DeDTOAModelo(ProveedorDTO proveedorDTO)
         {
             return proveedorDTO != null ? new Proveedor.Builder(proveedorDTO.Nombre, 
-            proveedorDTO.Apellido, 
-            proveedorDTO.Email, 
-            proveedorDTO.Telefono, 
-            proveedorDTO.Empresa, 
-            proveedorDTO.Direccion).conEstado(proveedorDTO.Estado).Construir() : null;
+                                                                proveedorDTO.Apellido, 
+                                                                proveedorDTO.Email, 
+                                                                proveedorDTO.Telefono, 
+                                                                proveedorDTO.Empresa, 
+                                                                proveedorDTO.Direccion).conEstado(proveedorDTO.Estado).Construir() : null;
         }
     }
 }

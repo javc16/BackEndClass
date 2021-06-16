@@ -12,8 +12,8 @@ namespace BackEndClass.AppServices.Interfaces
     {
         IEnumerable<UsuarioDTO> GetAll();
         Task<Response> GetById(long id);
-        Task<Response> PostUsuario(Usuario usuario);
-        Task<Response> PutUsuario(Usuario usuario);
-        Task<Response> DeleteUsuario(int id);
+        Task<Response> PostUsuario(UsuarioDTO usuario);
+        Task<Response> PutUsuario(UsuarioDTO usuario);
+        Task<Response> DeleteUsuario(UsuarioDTO usuario);
     }
 }

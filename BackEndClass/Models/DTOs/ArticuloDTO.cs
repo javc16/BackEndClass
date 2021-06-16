@@ -27,24 +27,24 @@ namespace BackEndClass.Models.DTOs
             }:null;
         }
 
-        public static IEnumerable<ArticuloDTO> DeModeloADTO(IEnumerable<Articulo> articulo)
+        public static IEnumerable<ArticuloDTO> DeModeloADTO(IEnumerable<Articulo> articulos)
         {
-            if (articulo == null) 
+            if (articulos == null) 
             {
                 return new List<ArticuloDTO>();
             }
-            List<ArticuloDTO> articuloData = new List<ArticuloDTO>();
+            List<ArticuloDTO> articulosData = new List<ArticuloDTO>();
 
-            foreach (var item in articulo) 
+            foreach (var item in articulos) 
             {
-                articuloData.Add(DeModeloADTO(item));
+                articulosData.Add(DeModeloADTO(item));
             }
 
-            return articuloData;
+            return articulosData;
         }
 
 
-        public static Articulo DeDTOAModelo(Articulo articuloDTO)
+        public static Articulo DeDTOAModelo(ArticuloDTO articuloDTO)
         {
             return articuloDTO != null ? new Articulo.Builder(articuloDTO.Id).conNombre(articuloDTO.Nombre).conDescripcion(articuloDTO.Descripcion).conPrecio(articuloDTO.Precio).Constuir() : null;
         }

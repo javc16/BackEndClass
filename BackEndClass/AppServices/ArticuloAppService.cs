@@ -25,9 +25,9 @@ namespace BackEndClass.AppServices
 
         public IEnumerable<ArticuloDTO> GetAll()
         {
-            var Articulo = _context.Articulo.Where(x => x.Estado == Constantes.Activo);
-            var articuloDTO = ArticuloDTO.DeModeloADTO(Articulo);
-            return articuloDTO;
+            var articulos = _context.Articulo.Where(x => x.Estado == Constantes.Activo);
+            var articulosDTO = ArticuloDTO.DeModeloADTO(articulos);
+            return articulosDTO;
         }
 
         public async Task<Response> GetById(long id)
@@ -41,44 +41,46 @@ namespace BackEndClass.AppServices
             return new Response { Datos = data };
         }
 
-        public async Task<Response> PostArticulo(Articulo Articulo)
+        public async Task<Response> PostArticulo(ArticuloDTO articuloDTO)
         {
-            string mensaje = _ArticuloDomainService.ValidarDescripcion(Articulo.Descripcion);
+            string mensaje = _ArticuloDomainService.ValidarDescripcion(articuloDTO.Descripcion);
             if (!mensaje.Equals(Constantes.ValidacionConExito))
             {
                 return new Response { Mensaje = mensaje };
             }
 
-            var GuardarArticulo = await _context.Articulo.FirstOrDefaultAsync(r => r.Descripcion == Articulo.Descripcion);
+            var GuardarArticulo = await _context.Articulo.FirstOrDefaultAsync(r => r.Descripcion == articuloDTO.Descripcion);
             if (GuardarArticulo != null)
             {
                 return new Response { Mensaje = "Este tipo de articulo ya existe en el sistema" };
             }
-
-            _context.Articulo.Add(Articulo);
+            var articulo = ArticuloDTO.DeDTOAModelo(articuloDTO);
+            _context.Articulo.Add(articulo);
             await _context.SaveChangesAsync();
             return new Response { Mensaje = "Tipo de Articulo agregado correctamente" };
         }
 
-        public async Task<Response> PutArticulo(Articulo Articulo)
+        public async Task<Response> PutArticulo(ArticuloDTO articuloDTO)
         {
-            _context.Entry(Articulo).State = EntityState.Modified;
+            var articulo = ArticuloDTO.DeDTOAModelo(articuloDTO);
+
+            _context.Entry(articulo).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return new Response { Mensaje = $"Articulo {Articulo.Descripcion} modificado correctamente" };
-       
+            return new Response { Mensaje = $"Articulo {articulo.Descripcion} modificado correctamente" };
+
         }
 
-        public async Task<Response> DeleteArticulo(int id)
+        public async Task<Response> DeleteArticulo(ArticuloDTO articuloDTO)
         {
-            var Articulo = await _context.Articulo.FindAsync(id);
-            if (Articulo == null)
+            var articulo = await _context.Articulo.FindAsync(articuloDTO.Id);
+            if (articulo == null)
             {
                 return new Response { Mensaje = $"No tenemos un tipo de articulo con ese id" }; ;
             }
-            Articulo.Estado = 0;
-            _context.Entry(Articulo).State = EntityState.Modified;
+            articulo.Estado = 0;
+            _context.Entry(articulo).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return new Response { Mensaje = $"Articulo {Articulo.Descripcion} eliminado correctamente" };
+            return new Response { Mensaje = $"Articulo {articulo.Descripcion} eliminado correctamente" };
         }
     }
 }
