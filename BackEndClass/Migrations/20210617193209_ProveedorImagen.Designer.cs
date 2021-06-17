@@ -4,14 +4,16 @@ using BackEndClass.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BackEndClass.Migrations
 {
     [DbContext(typeof(MWSContext))]
-    partial class MWSContextModelSnapshot : ModelSnapshot
+    [Migration("20210617193209_ProveedorImagen")]
+    partial class ProveedorImagen
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,9 +103,6 @@ namespace BackEndClass.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("image")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
