@@ -33,24 +33,6 @@ namespace BackEndClass
         {
             services.AddCors();
 
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy(name: "CorsPolicy",
-            //                    builder =>
-            //                    {
-            //                        builder.AllowAnyOrigin()
-            //                                .AllowAnyMethod()
-            //                                .AllowAnyHeader();
-            //                    });
-            //});
-
-            //services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            //{
-            //    builder.AllowAnyOrigin()
-            //           .AllowAnyMethod()
-            //           .AllowAnyHeader();
-            //}));
-
             services.AddDbContext<MWSContext>(
         options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 
