@@ -57,12 +57,11 @@ namespace BackEndClass.AppServices
             }
             else if ((GuardarProveedor != null && GuardarProveedor.Estado == Constantes.Inactivo)) 
             {
-
-                Proveedor proveedorEditado =ProveedorDTO.DeDTOAModelo(proveedorDTO);
-                proveedorEditado.Id = GuardarProveedor.Id;
-                _context.Entry(proveedorEditado).State = EntityState.Modified;
+                GuardarProveedor.Estado = Constantes.Activo;
+                GuardarProveedor.Image = proveedorDTO.Image;
+                _context.Entry(GuardarProveedor).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
-                return new Response { Mensaje = $"Proveedor {proveedorEditado.Nombre} activado correctamente" };
+                return new Response { Mensaje = $"Proveedor {GuardarProveedor.Nombre} activado correctamente" };
             }
             var proveedor = ProveedorDTO.DeDTOAModelo(proveedorDTO);
             _context.Proveedor.Add(proveedor);
