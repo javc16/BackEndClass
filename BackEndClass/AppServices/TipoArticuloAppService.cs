@@ -49,7 +49,7 @@ namespace BackEndClass.AppServices
                 return new Response { Mensaje = mensaje };
             }
 
-            var GuardarArticulo = await _context.TipoArticulo.FirstOrDefaultAsync(r => r.Descripcion == tipoArticuloDTO.Descripcion);
+            var GuardarArticulo = await _context.TipoArticulo.FirstOrDefaultAsync(r => r.Descripcion == tipoArticuloDTO.Descripcion && r.Estado == 1);
             if (GuardarArticulo != null)
             {
                 return new Response { Mensaje = "Este tipo de articulo ya existe en el sistema" };

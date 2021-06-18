@@ -49,7 +49,7 @@ namespace BackEndClass.AppServices
                 return new Response { Mensaje = mensaje };
             }
 
-            var GuardarServicio = await _context.TipoServicio.FirstOrDefaultAsync(r => r.Descripcion == tipoServicioDTO.Descripcion);
+            var GuardarServicio = await _context.TipoServicio.FirstOrDefaultAsync(r => r.Descripcion == tipoServicioDTO.Descripcion && r.Estado == 1);
             if (GuardarServicio != null)
             {
                 return new Response { Mensaje = "Este tipo de servicio ya existe en el sistema" };

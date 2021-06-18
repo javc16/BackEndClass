@@ -50,7 +50,7 @@ namespace BackEndClass.AppServices
                 return new Response { Mensaje = mensaje };
             }
 
-            var GuardarServicio = await _context.Servicio.FirstOrDefaultAsync(r => r.Nombre == servicioDTO.Nombre);
+            var GuardarServicio = await _context.Servicio.FirstOrDefaultAsync(r => r.Nombre == servicioDTO.Nombre && r.Estado == 1);
             if (GuardarServicio != null)
             {
                 return new Response { Mensaje = "Este servicio ya existe en el sistema" };
