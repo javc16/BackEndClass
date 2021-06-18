@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BackEndClass.Models.DTOs
 {
@@ -15,6 +12,7 @@ namespace BackEndClass.Models.DTOs
         public string Empresa { get; set; }
         public string Direccion { get; set; }
         public int Estado { get; set; }
+        public string Image { get; set; }
 
         public static ProveedorDTO DeModeloADTO(Proveedor proveedor)
         {
@@ -27,8 +25,8 @@ namespace BackEndClass.Models.DTOs
                 Telefono = proveedor.Telefono,
                 Empresa = proveedor.Empresa,
                 Direccion = proveedor.Direccion,
-                Estado = proveedor.Estado
-
+                Estado = proveedor.Estado,
+                Image = proveedor.Image
             } : null;
         }
 
@@ -56,7 +54,8 @@ namespace BackEndClass.Models.DTOs
                                                                 proveedorDTO.Email, 
                                                                 proveedorDTO.Telefono, 
                                                                 proveedorDTO.Empresa, 
-                                                                proveedorDTO.Direccion).conEstado(proveedorDTO.Estado).Construir() : null;
+                                                                proveedorDTO.Direccion,
+                                                                proveedorDTO.Image).conEstado(proveedorDTO.Estado).Construir() : null;
         }
     }
 }

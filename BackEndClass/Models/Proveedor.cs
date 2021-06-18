@@ -8,7 +8,6 @@ namespace BackEndClass.Models
     public class Proveedor
     {
         public int Id { get; set; }
-        public string image { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Email { get; set; }
@@ -16,6 +15,7 @@ namespace BackEndClass.Models
         public string Empresa { get; set; }
         public string Direccion { get; set; }
         public int Estado { get; set; }
+        public string Image { get; set; }
         List<Recomendacion> Recomendaciones { get; set; }
         public int IdMestroProveedor { get; set; }
         public MaestroProveedor MaestroProveedor { get; set; }
@@ -24,7 +24,7 @@ namespace BackEndClass.Models
             private readonly Proveedor _proveedor;
 
             public Builder(string nombre, string apellido, string email, string telefono,
-                            string empresa, string direccion)
+                            string empresa, string direccion, string image)
             {
                 _proveedor = new Proveedor
                 {
@@ -33,7 +33,8 @@ namespace BackEndClass.Models
                     Email = email,
                     Telefono = telefono,
                     Empresa = empresa,
-                    Direccion = direccion
+                    Direccion = direccion,
+                    Image = image
                 };
             }
             public Builder conEstado(int estado)
