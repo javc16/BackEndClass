@@ -51,9 +51,16 @@ namespace BackEndClass.AppServices
             }
 
             var GuardarProveedor= await _context.Proveedor.FirstOrDefaultAsync(r => r.Nombre == proveedorDTO.Nombre);
-            if (GuardarProveedor != null)
+            if (GuardarProveedor != null && GuardarProveedor.Estado == Constantes.Activo)
             {
                 return new Response { Mensaje = "Este proveedor ya existe en el sistema" };
+            }
+            else if ((GuardarProveedor != null && GuardarProveedor.Estado == Constantes.Inactivo)) 
+            {
+                GuardarProveedor.Estado = Constantes.Activo;
+                _context.Entry(GuardarProveedor).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return new Response { Mensaje = $"Proveedor {GuardarProveedor.Nombre} activado correctamente" };
             }
             var proveedor = ProveedorDTO.DeDTOAModelo(proveedorDTO);
             _context.Proveedor.Add(proveedor);
