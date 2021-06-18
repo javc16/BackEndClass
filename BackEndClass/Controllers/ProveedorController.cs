@@ -44,7 +44,7 @@ namespace BackEndClass.Controllers
             return Ok(await _proveedorAppService.PutProveedor(item));
         }
 
-        [HttpPut]
+        [HttpPut("delete")]
         public async Task<ActionResult<Response>> DeleteById(ProveedorDTO item)
         {
             return Ok(await _proveedorAppService.DeleteProveedor(item));
